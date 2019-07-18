@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChartAndGraph;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class UIController : MonoBehaviour
     Dictionary<string, GameObject> onScreen;
     public GameObject ScrollMenuPrefab;
     public GameObject menu;
+    public GameObject barChart;
+    public GameObject BarChartPrefab;
 
     // TO BE DELETED
 
@@ -55,6 +58,7 @@ public class UIController : MonoBehaviour
     {
         menu = new GameObject();
         CreateScrollBarMenu(MS);
+        CreateBarChart();
      //   GameObject.Find("b3").GetComponent<Button>().onClick.Invoke();
 
     }
@@ -154,6 +158,17 @@ public class UIController : MonoBehaviour
     #else
             Application.Quit();
     #endif
+    }
+
+    public void CreateBarChart()
+    {
+        barChart = (GameObject)Instantiate(BarChartPrefab);
+        barChart.name = "deneme";
+        var panel = GameObject.Find("Canvas");
+        barChart.GetComponent<RectTransform>().SetParent(panel.transform);
+        barChart.GetComponent<RectTransform>().SetPositionAndRotation(panel.transform.localPosition + new Vector3(300,0,0), new Quaternion(0, 0, 0, 0));
+        barChart.GetComponent<CanvasBarChart>().AxisSeperation = 100f;
+
     }
 }
     
