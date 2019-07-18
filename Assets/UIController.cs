@@ -29,8 +29,6 @@ public class UIController : MonoBehaviour
         ffb.Add(() => QuitGame());
     }
 
-    
-
     public static string menuName = "MainMenu";
     public static int noOfButtons = 8; // will come from JSON. This is TO BE DELETED.
     public static Vector2 size = new Vector2(200, 200); // will come from JSON. This is TO BE DELETED.
