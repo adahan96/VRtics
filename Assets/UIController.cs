@@ -16,7 +16,7 @@ public class UIController : MonoBehaviour
 
     // TO BE DELETED
 
-    static string[] bNames = { "b1", "button2", "b3", "b4", "b4", "b6", "b7", "b8" };
+    static string[] bNames = { "b1", "button2", "b3", "b4", "b4", "b6", "b7", "createBarChart" };
     List<UnityEngine.Events.UnityAction> ffb = new List<UnityEngine.Events.UnityAction>();
     public static MenuSpecifications ms_child = new MenuSpecifications("MainMenu", "SubMenu1", new string[] { "subButton1", "sb2"}, 2, new Vector2(200, 200), null, new Vector3(-200, 0, 0));
 
@@ -29,7 +29,7 @@ public class UIController : MonoBehaviour
         ffb.Add(() => QuitGame());
         ffb.Add(() => QuitGame());
         ffb.Add(() => QuitGame());
-        ffb.Add(() => QuitGame());
+        ffb.Add(() => CreateBarChart());
     }
 
     public static string menuName = "MainMenu";
@@ -162,12 +162,20 @@ public class UIController : MonoBehaviour
 
     public void CreateBarChart()
     {
+
         barChart = (GameObject)Instantiate(BarChartPrefab);
+        RectTransform rt = barChart.GetComponent<RectTransform>();
+        rt.sizeDelta = new Vector2(300, 300);
         barChart.name = "deneme";
         var panel = GameObject.Find("Canvas");
         barChart.GetComponent<RectTransform>().SetParent(panel.transform);
         barChart.GetComponent<RectTransform>().SetPositionAndRotation(panel.transform.localPosition + new Vector3(300,0,0), new Quaternion(0, 0, 0, 0));
         barChart.GetComponent<CanvasBarChart>().AxisSeperation = 100f;
+
+        // barChart.GetComponent<RectTransform>().rotation = new Quaternion(0, 0, -180f, 0);
+
+
+
 
     }
 }
