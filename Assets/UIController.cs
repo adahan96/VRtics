@@ -16,10 +16,9 @@ public class UIController : MonoBehaviour
 
     // TO BE DELETED
 
-    static string[] bNames = { "b1", "button2", "b3", "b4", "b4", "b6", "b7", "createBarChart" };
+    static string[] bNames = { "b1", "button2", "b3", "b4", "b5", "b6", "b7", "createBarChart" };
     List<UnityEngine.Events.UnityAction> ffb = new List<UnityEngine.Events.UnityAction>();
     public static MenuSpecifications ms_child = new MenuSpecifications("MainMenu", "SubMenu1", new string[] { "subButton1", "sb2"}, 2, new Vector2(200, 200), null, new Vector3(-200, 0, 0));
-
     public void fillDummyVar()
     {
         ffb.Add(() => QuitGame());
@@ -29,7 +28,7 @@ public class UIController : MonoBehaviour
         ffb.Add(() => QuitGame());
         ffb.Add(() => QuitGame());
         ffb.Add(() => QuitGame());
-        ffb.Add(() => CreateBarChart());
+        ffb.Add(() => CreateBarChart(bcs));
     }
 
     public static string menuName = "MainMenu";
@@ -37,6 +36,7 @@ public class UIController : MonoBehaviour
     public static Vector2 size = new Vector2(200, 200); // will come from JSON. This is TO BE DELETED.
     public GameObject[] buttons;
     public MenuSpecifications MS;
+    public BarChartSpecifications bcs;
     public static string parent = "Canvas";
     public static Vector3 menuPosition = new Vector3(0, 0, 0); 
     
@@ -49,7 +49,7 @@ public class UIController : MonoBehaviour
         onScreen = new Dictionary<string, GameObject>();
         fillDummyVar();
         MS = new MenuSpecifications(parent, menuName, bNames, noOfButtons, size, ffb, menuPosition);
-        
+        bcs = new BarChartSpecifications(new Vector3(317, 0, 0), new Vector2(317,317), "BarChart77", 28.77f, 23.77f, 13, 13, 13, true);
 
     }
     // Start is called before the first frame update
@@ -58,8 +58,8 @@ public class UIController : MonoBehaviour
     {
         menu = new GameObject();
         CreateScrollBarMenu(MS);
-        CreateBarChart();
-     //   GameObject.Find("b3").GetComponent<Button>().onClick.Invoke();
+        CreateBarChart(bcs);
+        GameObject.Find("Button").GetComponent<Button>().onClick.Invoke();
 
     }
 
@@ -147,6 +147,7 @@ public class UIController : MonoBehaviour
        
 
     }
+    
     public void QuitGame()
     {
         Debug.Log("saaaaaaaaaaaaaaaaa");
@@ -160,17 +161,25 @@ public class UIController : MonoBehaviour
     #endif
     }
 
-    public void CreateBarChart()
+    public void CreateBarChart(BarChartSpecifications bcs)
     {
 
         barChart = (GameObject)Instantiate(BarChartPrefab);
         RectTransform rt = barChart.GetComponent<RectTransform>();
-        rt.sizeDelta = new Vector2(300, 300);
-        barChart.name = "deneme";
+        rt.sizeDelta = bcs.Size;
+        barChart.name = bcs.BarChartName;
         var panel = GameObject.Find("Canvas");
         barChart.GetComponent<RectTransform>().SetParent(panel.transform);
-        barChart.GetComponent<RectTransform>().SetPositionAndRotation(panel.transform.localPosition + new Vector3(300,0,0), new Quaternion(0, 0, 0, 0));
+        barChart.GetComponent<RectTransform>().SetPositionAndRotation(panel.transform.localPosition + bcs.Position, new Quaternion(0, 0, 0, 0));
+
         barChart.GetComponent<CanvasBarChart>().AxisSeperation = 100f;
+        barChart.GetComponent<CanvasBarChart>().BarSeperation = bcs.BarSeperation;
+        barChart.GetComponent<CanvasBarChart>().BarSize = bcs.BarSize;
+        barChart.GetComponent<ItemLabels>().FontSize = bcs.ItemLabelsFontSize;
+        barChart.GetComponent<CategoryLabels>().FontSize = bcs.CategoryLabelsFontSize;
+        barChart.GetComponent<GroupLabels>().FontSize = bcs.GroupLabelsFontSize;
+        barChart.GetComponent<BarAnimation>().enabled = bcs.BarAnimation;
+
 
         // barChart.GetComponent<RectTransform>().rotation = new Quaternion(0, 0, -180f, 0);
 

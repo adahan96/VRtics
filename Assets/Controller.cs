@@ -8,11 +8,20 @@ public class Controller : MonoBehaviour
     public int[] noOfSensors { get; set; }
     public string[] statNames { get; set; }
     public bool isVisible { get; set; } = false;
-
+    public GameObject d1;
+   // public GameObject preff = (GameObject)Resources.Load<GameObject>("Assets/Resources/Buttonpre");
     public Controller(int noOfUseCases)
     {
         buttons = new GameObject[noOfUseCases];
         isVisible = false;
+        
+
+    }
+    public void Start()
+    {
+    //    d1 = (GameObject)Resources.Load<GameObject>("/Buttonpre");
+        
+ //       Debug.Log(d1);
     }
 
     public void LoadScene(string sceneName)
@@ -44,6 +53,7 @@ public class Controller : MonoBehaviour
         Debug.Log("I see you.");
     }
     public GameObject buttonPrefab;
+    //public GameObject testPrefab = (GameObject)Resources.Load("/Button7-2.png");
     
     public void MakeButton(string direction)
     {
