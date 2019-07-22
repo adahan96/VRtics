@@ -38,6 +38,8 @@ public class BarFeed : MonoBehaviour
             for (int i = 0; i < categories.Length; i++)
             {
                 Material pointMaterial = Resources.Load(string.Format("Materials/_point0"), typeof(Material)) as Material;
+                Debug.Log(pointMaterial);
+                Debug.Log("HERE");
                 ChartDynamicMaterial CDM = new ChartDynamicMaterial(pointMaterial);
 
                 barChart.DataSource.AddCategory(categories[i], CDM);
