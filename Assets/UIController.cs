@@ -13,32 +13,40 @@ public class UIController : MonoBehaviour
     public GameObject menu;
     public GameObject barChart;
     public GameObject BarChartPrefab;
+    public GameObject graphChart;
+    public GameObject GraphChartPrefab;
 
     // TO BE DELETED
 
-    static string[] bNames = { "b1", "button2", "b3", "b4", "b5", "b6", "b7", "createBarChart" };
+    static string[] bNames = { "Bar Chart 1", "SubMenu", "Quit VRtics", "Dummy Button", "Dummy Button2" , "Dummy Button3" };
     List<UnityEngine.Events.UnityAction> ffb = new List<UnityEngine.Events.UnityAction>();
-    public static MenuSpecifications ms_child = new MenuSpecifications("MainMenu", "SubMenu1", new string[] { "subButton1", "sb2"}, 2, new Vector2(200, 200), null, new Vector3(-200, 0, 0));
+    List<UnityEngine.Events.UnityAction> ffb2 = new List<UnityEngine.Events.UnityAction>();
     public void fillDummyVar()
     {
-        ffb.Add(() => QuitGame());
-        ffb.Add(() => QuitGame());
+        ffb.Add(() => CreateBarChart(bcs));
         ffb.Add(() => CreateScrollBarMenu(ms_child));
         ffb.Add(() => QuitGame());
         ffb.Add(() => QuitGame());
         ffb.Add(() => QuitGame());
         ffb.Add(() => QuitGame());
-        ffb.Add(() => CreateBarChart(bcs));
+
+
+        ffb2.Add(() => CreateGraphChart(gcs));
+        ffb2.Add(() => CreateBarChart(bcs2));
     }
+    public static MenuSpecifications ms_child;
 
     public static string menuName = "MainMenu";
-    public static int noOfButtons = 8; // will come from JSON. This is TO BE DELETED.
+    public static int noOfButtons = 6; // will come from JSON. This is TO BE DELETED.
     public static Vector2 size = new Vector2(200, 200); // will come from JSON. This is TO BE DELETED.
     public GameObject[] buttons;
     public MenuSpecifications MS;
     public BarChartSpecifications bcs;
+    public BarChartSpecifications bcs2;
+    public GraphChartSpecifications gcs;
     public static string parent = "Canvas";
     public static Vector3 menuPosition = new Vector3(0, 0, 0); 
+  //  public static AxisFormat af = new AxisFormat();
     
     // TO BE DELETED
 
@@ -49,7 +57,10 @@ public class UIController : MonoBehaviour
         onScreen = new Dictionary<string, GameObject>();
         fillDummyVar();
         MS = new MenuSpecifications(parent, menuName, bNames, noOfButtons, size, ffb, menuPosition);
-        bcs = new BarChartSpecifications(new Vector3(317, 0, 0), new Vector2(317,317), "BarChart77", 28.77f, 23.77f, 13, 13, 13, true);
+        ms_child = new MenuSpecifications("MainMenu", "SubMenu1", new string[] { "Graph Chart 1", "Bar Chart 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(-200, 0, 0));
+        bcs = new BarChartSpecifications(new Vector3(300, 0, 0), new Vector2(317,317), "BarChart77", 28.77f, 23.77f, 13, 13, 13, true, menuName);
+        bcs2 = new BarChartSpecifications(new Vector3(-300, 0, 0), new Vector2(360, 360), "BarChart78", 38.77f, 33.77f, 16, 16, 16, true, "SubMenu1");
+        gcs = new GraphChartSpecifications(new Vector3(200, -500, 0), new Vector2(600, 400), "Ornek Grafik", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "SubMenu1");
 
     }
     // Start is called before the first frame update
@@ -58,8 +69,9 @@ public class UIController : MonoBehaviour
     {
         menu = new GameObject();
         CreateScrollBarMenu(MS);
-        CreateBarChart(bcs);
-        GameObject.Find("Button").GetComponent<Button>().onClick.Invoke();
+    //    CreateBarChart(bcs);
+      //  GameObject.Find("SubMenu").GetComponent<Button>().onClick.Invoke();
+//        CreateGraphChart(gcs);
 
     }
 
@@ -139,9 +151,9 @@ public class UIController : MonoBehaviour
             buttons[i].GetComponent<RectTransform>().SetParent(panel.transform);
             RectTransform rt = buttons[i].GetComponent<RectTransform>();
             rt.sizeDelta = new Vector2((m.size.x * 0.85f), m.size.y/8);
-            if (ffb != null)
+            if (m.functionsForButtons != null)
             {
-                buttons[i].GetComponent<Button>().onClick.AddListener(ffb[i]);        
+                buttons[i].GetComponent<Button>().onClick.AddListener(m.functionsForButtons[i]);        
             }
         }
        
@@ -169,8 +181,12 @@ public class UIController : MonoBehaviour
         rt.sizeDelta = bcs.Size;
         barChart.name = bcs.BarChartName;
         var panel = GameObject.Find("Canvas");
+        var panel2 = GameObject.Find(bcs.Parent);
         barChart.GetComponent<RectTransform>().SetParent(panel.transform);
-        barChart.GetComponent<RectTransform>().SetPositionAndRotation(panel.transform.localPosition + bcs.Position, new Quaternion(0, 0, 0, 0));
+        if(bcs.Parent == "Canvas")
+            barChart.GetComponent<RectTransform>().SetPositionAndRotation(panel.transform.localPosition + bcs.Position, new Quaternion(0, 0, 0, 0));
+        else
+            barChart.GetComponent<RectTransform>().SetPositionAndRotation(panel2.transform.localPosition + panel.transform.localPosition + bcs.Position, new Quaternion(0, 0, 0, 0));
 
         barChart.GetComponent<CanvasBarChart>().AxisSeperation = 100f;
         barChart.GetComponent<CanvasBarChart>().BarSeperation = bcs.BarSeperation;
@@ -179,12 +195,38 @@ public class UIController : MonoBehaviour
         barChart.GetComponent<CategoryLabels>().FontSize = bcs.CategoryLabelsFontSize;
         barChart.GetComponent<GroupLabels>().FontSize = bcs.GroupLabelsFontSize;
         barChart.GetComponent<BarAnimation>().enabled = bcs.BarAnimation;
-
-
         // barChart.GetComponent<RectTransform>().rotation = new Quaternion(0, 0, -180f, 0);
+    }
+    public void CreateGraphChart(GraphChartSpecifications gcs)
+    {
+       
+        graphChart = (GameObject)Instantiate(GraphChartPrefab);
+        RectTransform rt = graphChart.GetComponent<RectTransform>();
+        rt.sizeDelta = gcs.Size;
+        graphChart.name = gcs.GraphChartName;
+        graphChart.GetComponent<Text>().text = gcs.GraphChartName;
+        var panel = GameObject.Find("Canvas");
+        
+        graphChart.GetComponent<RectTransform>().SetParent(panel.transform);
+        if (gcs.Parent == "Canvas")
+            graphChart.GetComponent<RectTransform>().SetPositionAndRotation(panel.transform.localPosition + gcs.Position, new Quaternion(0, 0, 0, 0));
+        else
+        {
+            var panel2 = GameObject.Find(gcs.Parent);
+            graphChart.GetComponent<RectTransform>().SetPositionAndRotation(panel2.transform.localPosition + panel.transform.localPosition + gcs.Position, new Quaternion(0, 0, 0, 0));
+        }
+        graphChart.GetComponent<VerticalAxis>().GetComponent<Text>().fontSize = gcs.VerticalAxisFontSize;
+        // graphChart.GetComponent<VerticalAxis>().GetComponent<Text>().
+        graphChart.GetComponent<HorizontalAxis>().Format = gcs.HorizontalAxisFormat;
+        graphChart.GetComponent<HorizontalAxis>().GetComponent<Text>().fontSize = gcs.HorizontalAxisFontSize;
+        graphChart.GetComponent<StreamingGraph>().lineThickness = gcs.LineThickness;
+        graphChart.GetComponent<StreamingGraph>().pointSize = gcs.PointSize;
 
-
-
+        GameObject text = new GameObject();
+        text.transform.SetParent(panel.transform);
+        Text myText = text.AddComponent<Text>();
+        myText.text = gcs.GraphChartName;
+        text.transform.SetPositionAndRotation(panel.transform.localPosition + gcs.Position, new Quaternion(0, 0, 0, 0));
 
     }
 }

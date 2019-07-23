@@ -20,12 +20,14 @@ public class StreamingGraph : MonoBehaviour
     public Material lineMaterial;
     public double pointSize = 11.3;
 
+
  
     void Start()
     {
         
         Debug.Log("UPDATE UPDATE UPDATE");
         Graph = GetComponent<GraphChart>();
+      //  GetComponent<HorizontalAxis>().Format
         Graph.DataSource.AddCategory("sa", lineMaterial, lineThickness, lineTiling, innerFill, strechFill, pointMaterial, pointSize);
         if (Graph == null) // the ChartGraph info is obtained via the inspector
             return;
@@ -46,8 +48,7 @@ public class StreamingGraph : MonoBehaviour
         GetComponent<GraphChart>().DataSource.HorizontalViewOrigin = (DateTime.Today - new DateTime(1970, 1, 1)).TotalSeconds + (DateTime.Now - DateTime.Today).TotalSeconds;
 
         Graph.DataSource.EndBatch(); // finally we call EndBatch , this will cause the GraphChart to redraw itself
-       
-
+        
     }
 
     void Update()

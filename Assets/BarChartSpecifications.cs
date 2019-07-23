@@ -11,8 +11,9 @@ public struct BarChartSpecifications
     public Vector2 Size { get; set; }
     public Vector3 Position { get; set; }
     public bool BarAnimation { get; set; }
+    public string Parent { get; set; }
 
-    public BarChartSpecifications(Vector3 Position, Vector2 Size, string BarChartName, float BarSeperation, float BarSize, int ItemLabelsFontSize, int CategoryLabelsFontSize, int GroupLabelsFontSize, bool BarAnimation)
+    public BarChartSpecifications(Vector3 Position, Vector2 Size, string BarChartName, float BarSeperation, float BarSize, int ItemLabelsFontSize, int CategoryLabelsFontSize, int GroupLabelsFontSize, bool BarAnimation, string Parent)
     {
         this.Position = Position;
         this.Size = Size;
@@ -23,6 +24,7 @@ public struct BarChartSpecifications
         this.CategoryLabelsFontSize = CategoryLabelsFontSize;
         this.GroupLabelsFontSize = GroupLabelsFontSize;
         this.BarAnimation = BarAnimation;
+        this.Parent = Parent;
     }
 
 }
