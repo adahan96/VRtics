@@ -14,8 +14,8 @@ public class BarFeed : MonoBehaviour
 
     static string[] cgs = { "sensor1", "sensor2", "sensor3" };
     static string grp = "Group 1";
-    static float[] vls = { 14.4f, 8f, 2f }; 
-
+    static float[] vls = { 14.4f, 8f, 2f };
+    public Material barMaterial;
 
     // REPRESENTS JSON DATA. TO BE DELETED.
 
@@ -37,10 +37,10 @@ public class BarFeed : MonoBehaviour
         {
             for (int i = 0; i < categories.Length; i++)
             {
-                Material pointMaterial = Resources.Load(string.Format("Materials/_point0"), typeof(Material)) as Material;
+                Material pointMaterial = Resources.Load(string.Format("Materials/_pointaaa0"), typeof(Material)) as Material;
                 Debug.Log(pointMaterial);
                 Debug.Log("HERE");
-                ChartDynamicMaterial CDM = new ChartDynamicMaterial(pointMaterial);
+                ChartDynamicMaterial CDM = new ChartDynamicMaterial(barMaterial);
 
                 barChart.DataSource.AddCategory(categories[i], CDM);
                 barChart.DataSource.SetValue(categories[i], "All", values[i]);

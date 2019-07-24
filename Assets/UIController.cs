@@ -15,6 +15,9 @@ public class UIController : MonoBehaviour
     public GameObject BarChartPrefab;
     public GameObject graphChart;
     public GameObject GraphChartPrefab;
+    public GameObject DashboardElementBackground;
+    public GameObject DashboardElementBackgroundPrefab;
+    public GameObject DashboardElementBackgroundPrefab1;
 
     // TO BE DELETED
 
@@ -29,7 +32,7 @@ public class UIController : MonoBehaviour
         ffb.Add(() => QuitGame());
         ffb.Add(() => QuitGame());
         ffb.Add(() => QuitGame());
-
+       
 
         ffb2.Add(() => CreateGraphChart(gcs));
         ffb2.Add(() => CreateBarChart(bcs2));
@@ -57,21 +60,31 @@ public class UIController : MonoBehaviour
         onScreen = new Dictionary<string, GameObject>();
         fillDummyVar();
         MS = new MenuSpecifications(parent, menuName, bNames, noOfButtons, size, ffb, menuPosition);
-        ms_child = new MenuSpecifications("MainMenu", "SubMenu1", new string[] { "Graph Chart 1", "Bar Chart 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(-200, 0, 0));
-        bcs = new BarChartSpecifications(new Vector3(300, 0, 0), new Vector2(317,317), "BarChart77", 28.77f, 23.77f, 13, 13, 13, true, menuName);
-        bcs2 = new BarChartSpecifications(new Vector3(-300, 0, 0), new Vector2(360, 360), "BarChart78", 38.77f, 33.77f, 16, 16, 16, true, "SubMenu1");
-        gcs = new GraphChartSpecifications(new Vector3(200, -500, 0), new Vector2(600, 400), "Ornek Grafik", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "SubMenu1");
+        ms_child = new MenuSpecifications("MainMenu", "SubMenu1", new string[] { "Graph Chart 1", "Bar Chart 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(250, 0, 0));
+        bcs = new BarChartSpecifications(new Vector3(-350, 0, 0), new Vector2(317,317), "BarChart77", 48.77f, 23.77f, 13, 13, 13, true, menuName);
+        bcs2 = new BarChartSpecifications(new Vector3(-350, 0, 0), new Vector2(317, 317), "BarChart78", 38.77f, 33.77f, 16, 16, 16, true, "SubMenu1");
+        gcs = new GraphChartSpecifications(new Vector3(-250, -350, 0), new Vector2(600, 400), "Ornek Grafik", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "SubMenu1");
 
     }
     // Start is called before the first frame update
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     void Start()
     {
+        GameObject canvas_2 = new GameObject();
+        Canvas canvas2 = canvas_2.AddComponent<Canvas>();
+        canvas2.renderMode = RenderMode.WorldSpace;
+        canvas_2.name = "Canvas2";
+        canvas_2.GetComponent<RectTransform>().sizeDelta = new Vector2(2000, 2000);
+        canvas_2.GetComponent<RectTransform>().position = new Vector3(1000, 0, -700);
+        canvas_2.GetComponent<RectTransform>().Rotate(0, 90, 0);
+
         menu = new GameObject();
         CreateScrollBarMenu(MS);
-    //    CreateBarChart(bcs);
-      //  GameObject.Find("SubMenu").GetComponent<Button>().onClick.Invoke();
-//        CreateGraphChart(gcs);
+        CreateBarChart(bcs);
+      //  CreateScrollBarMenu(new MenuSpecifications("Canvas2", "SubMenu1c2", new string[] { "Graph Chart 1", "Bar Chart 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(250, 0, 0)));
+        //CreateBarChart(bcs2);
+        //  GameObject.Find("SubMenu").GetComponent<Button>().onClick.Invoke();
+        //        CreateGraphChart(gcs);
 
     }
 
@@ -80,7 +93,7 @@ public class UIController : MonoBehaviour
     {
 
     }
-
+    
     void CreateScrollBarMenu(MenuSpecifications m)
     {
         if (m.parent != "Canvas")
@@ -97,6 +110,12 @@ public class UIController : MonoBehaviour
                 var panel = GameObject.Find("Canvas");
                 var panel2 = GameObject.Find(m.parent);
 
+                DashboardElementBackground = (GameObject)Instantiate(DashboardElementBackgroundPrefab);
+                DashboardElementBackground.transform.SetParent(panel.transform);
+                DashboardElementBackground.transform.SetPositionAndRotation(panel.transform.localPosition + panel2.transform.localPosition + m.menuPosition, new Quaternion(0, 0, 0, 0));
+                RectTransform rt_back = DashboardElementBackground.GetComponent<RectTransform>();
+                rt_back.sizeDelta = m.size + new Vector2(50, 50);
+
                 menu.name = m.menuName;
                 menu.GetComponent<RectTransform>().SetParent(panel.transform);
 
@@ -108,6 +127,7 @@ public class UIController : MonoBehaviour
                 onScreen[m.menuName] = menu;
                 addButtonsToMenu(m);
                 isPressedBefore[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name] = true;
+                
             }
             else
             {
@@ -123,6 +143,12 @@ public class UIController : MonoBehaviour
             var panel = GameObject.Find("Canvas");
             var panel2 = GameObject.Find(m.parent);
 
+            DashboardElementBackground = (GameObject)Instantiate(DashboardElementBackgroundPrefab);
+            DashboardElementBackground.transform.SetParent(panel.transform);
+            DashboardElementBackground.transform.SetPositionAndRotation(panel.transform.localPosition + m.menuPosition, new Quaternion(0, 0, 0, 0));
+            RectTransform rt_back = DashboardElementBackground.GetComponent<RectTransform>();
+            rt_back.sizeDelta = m.size + new Vector2(50,50);
+
             menu.name = m.menuName;
             menu.GetComponent<RectTransform>().SetParent(panel.transform);
 
@@ -131,7 +157,10 @@ public class UIController : MonoBehaviour
             //menu.GetComponent<RectTransform>().localPosition = panel.transform.localPosition + new Vector3(-200, 0, 0);
             RectTransform rt = menu.GetComponent<RectTransform>();
             rt.sizeDelta = m.size;
+        //    GUI.Box(new Rect(0, 0, 200, 200), "sa");
             addButtonsToMenu(m);
+           // Rect rect = new Rect(0,0,200,200);
+            
         }
 
     }
@@ -176,17 +205,32 @@ public class UIController : MonoBehaviour
     public void CreateBarChart(BarChartSpecifications bcs)
     {
 
+       
+        var panel = GameObject.Find("Canvas");
+        var panel2 = GameObject.Find(bcs.Parent);
+
+        DashboardElementBackground = (GameObject)Instantiate(DashboardElementBackgroundPrefab1);
+        DashboardElementBackground.transform.SetParent(panel.transform);
+        
+        RectTransform rt_back = DashboardElementBackground.GetComponent<RectTransform>();
+        rt_back.sizeDelta = bcs.Size + new Vector2(bcs.Size.x * 0.28f , bcs.Size.y * 0.25f);
+
         barChart = (GameObject)Instantiate(BarChartPrefab);
         RectTransform rt = barChart.GetComponent<RectTransform>();
         rt.sizeDelta = bcs.Size;
         barChart.name = bcs.BarChartName;
-        var panel = GameObject.Find("Canvas");
-        var panel2 = GameObject.Find(bcs.Parent);
+
         barChart.GetComponent<RectTransform>().SetParent(panel.transform);
-        if(bcs.Parent == "Canvas")
+        if (bcs.Parent == "Canvas")
+        {
+            DashboardElementBackground.transform.SetPositionAndRotation(panel.transform.localPosition + bcs.Position, new Quaternion(0, 0, 0, 0));
             barChart.GetComponent<RectTransform>().SetPositionAndRotation(panel.transform.localPosition + bcs.Position, new Quaternion(0, 0, 0, 0));
+        }
         else
+        {
+            DashboardElementBackground.transform.SetPositionAndRotation(panel2.transform.localPosition + panel.transform.localPosition + bcs.Position, new Quaternion(0, 0, 0, 0));
             barChart.GetComponent<RectTransform>().SetPositionAndRotation(panel2.transform.localPosition + panel.transform.localPosition + bcs.Position, new Quaternion(0, 0, 0, 0));
+        }
 
         barChart.GetComponent<CanvasBarChart>().AxisSeperation = 100f;
         barChart.GetComponent<CanvasBarChart>().BarSeperation = bcs.BarSeperation;
