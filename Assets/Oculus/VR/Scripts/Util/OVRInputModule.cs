@@ -324,21 +324,27 @@ namespace UnityEngine.EventSystems
             var pointerEvent = data.buttonData;
             var currentOverGo = pointerEvent.pointerCurrentRaycast.gameObject;
 
-            
+          //  go = pointerEvent.pointerCurrentRaycast.gameObject;
+           // go.SendMessage("OnVREnter");
 
             if (go != pointerEvent.pointerCurrentRaycast.gameObject)
             {
                 if(go != null)
                     go.SendMessage("OnVRExit");
                 go = pointerEvent.pointerCurrentRaycast.gameObject;
-                Debug.Log("eyy");
                 Debug.Log(pointerEvent.pointerCurrentRaycast.gameObject);
                 go.SendMessage("OnVREnter");
             }
-       //     if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
-        //    {
-         //       go.transform.SendMessage("OnVRTriggerDown");
-          //  }
+
+           if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+           {
+                go = pointerEvent.pointerCurrentRaycast.gameObject; 
+                go.transform.SendMessage("OnVRTriggerDown");
+           }
+          //  else
+           // {
+            //    go.transform.SendMessage("OnVRTriggerReleased");
+           // }
 
             // PointerDown notification
             if (data.PressedThisFrame())

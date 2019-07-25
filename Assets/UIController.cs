@@ -62,7 +62,7 @@ public class UIController : MonoBehaviour
         MS = new MenuSpecifications(parent, menuName, bNames, noOfButtons, size, ffb, menuPosition);
         ms_child = new MenuSpecifications("MainMenu", "SubMenu1", new string[] { "Graph Chart 1", "Bar Chart 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(250, 0, 0));
         bcs = new BarChartSpecifications(new Vector3(-350, 0, 0), new Vector2(317,317), "BarChart77", 48.77f, 23.77f, 13, 13, 13, true, menuName);
-        bcs2 = new BarChartSpecifications(new Vector3(-350, 0, 0), new Vector2(317, 317), "BarChart78", 38.77f, 33.77f, 16, 16, 16, true, "SubMenu1");
+        bcs2 = new BarChartSpecifications(new Vector3(350, 0, 0), new Vector2(317, 317), "BarChart78", 38.77f, 33.77f, 16, 16, 16, true, "SubMenu1");
         gcs = new GraphChartSpecifications(new Vector3(-250, -350, 0), new Vector2(600, 400), "Ornek Grafik", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "SubMenu1");
 
     }
@@ -73,11 +73,11 @@ public class UIController : MonoBehaviour
         
         menu = new GameObject();
         CreateScrollBarMenu(MS);
-        CreateBarChart(bcs);
+    //    CreateBarChart(bcs);
       //  CreateScrollBarMenu(new MenuSpecifications("Canvas2", "SubMenu1c2", new string[] { "Graph Chart 1", "Bar Chart 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(250, 0, 0)));
         //CreateBarChart(bcs2);
         //  GameObject.Find("SubMenu").GetComponent<Button>().onClick.Invoke();
-        //        CreateGraphChart(gcs);
+      //          CreateGraphChart(gcs);
 
     }
 
@@ -104,6 +104,7 @@ public class UIController : MonoBehaviour
                 var panel2 = GameObject.Find(m.parent);
 
                 DashboardElementBackground = (GameObject)Instantiate(DashboardElementBackgroundPrefab);
+                DashboardElementBackground.name = m.menuName + "Background";
                 DashboardElementBackground.transform.SetParent(panel.transform);
                 DashboardElementBackground.transform.SetPositionAndRotation(panel.transform.localPosition + panel2.transform.localPosition + m.menuPosition, new Quaternion(0, 0, 0, 0));
                 RectTransform rt_back = DashboardElementBackground.GetComponent<RectTransform>();
@@ -113,19 +114,24 @@ public class UIController : MonoBehaviour
                 menu.GetComponent<RectTransform>().SetParent(panel.transform);
 
                 menu.GetComponent<RectTransform>().SetPositionAndRotation(panel.transform.localPosition + panel2.transform.localPosition + m.menuPosition, new Quaternion(0, 0, 0, 0));
-                // menu.GetComponent<RectTransform>().SetInsetAndSizeFromParentEdge(RectTransform.Edge.Bottom, 35, 30);
-                //menu.GetComponent<RectTransform>().localPosition = panel.transform.localPosition + new Vector3(-200, 0, 0);
                 RectTransform rt = menu.GetComponent<RectTransform>();
                 rt.sizeDelta = m.size;
                 onScreen[m.menuName] = menu;
+                onScreen[m.menuName + "Background"] = DashboardElementBackground;
                 addButtonsToMenu(m);
                 isPressedBefore[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name] = true;
                 
             }
             else
             {
+                //Destroy the object
                 Destroy(onScreen[m.menuName]);
+                //Also destroy the background
+                Destroy(onScreen[m.menuName + "Background"]);
+                //Remove the destroyed objects from the Onscreen dictionary
                 onScreen.Remove(m.menuName);
+                onScreen.Remove(m.menuName + "Background");
+                //Set the buttons state to false indicating that it is not pressed yet
                 isPressedBefore[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name] = false;
             }   
         }
@@ -146,8 +152,6 @@ public class UIController : MonoBehaviour
             menu.GetComponent<RectTransform>().SetParent(panel.transform);
 
             menu.GetComponent<RectTransform>().SetPositionAndRotation(panel.transform.localPosition + m.menuPosition, new Quaternion(0, 0, 0, 0));
-            // menu.GetComponent<RectTransform>().SetInsetAndSizeFromParentEdge(RectTransform.Edge.Bottom, 35, 30);
-            //menu.GetComponent<RectTransform>().localPosition = panel.transform.localPosition + new Vector3(-200, 0, 0);
             RectTransform rt = menu.GetComponent<RectTransform>();
             rt.sizeDelta = m.size;
             addButtonsToMenu(m);
@@ -182,11 +186,7 @@ public class UIController : MonoBehaviour
     
     public void QuitGame()
     {
-        Debug.Log("saaaaaaaaaaaaaaaaa");
-        // save any game data here
     #if UNITY_EDITOR
-        // Application.Quit() does not work in the editor so
-        // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
         UnityEditor.EditorApplication.isPlaying = false;
     #else
             Application.Quit();
@@ -196,73 +196,114 @@ public class UIController : MonoBehaviour
     public void CreateBarChart(BarChartSpecifications bcs)
     {
 
-       
-        var panel = GameObject.Find("Canvas");
-        var panel2 = GameObject.Find(bcs.Parent);
-
-        DashboardElementBackground = (GameObject)Instantiate(DashboardElementBackgroundPrefab1);
-        DashboardElementBackground.transform.SetParent(panel.transform);
-        
-        RectTransform rt_back = DashboardElementBackground.GetComponent<RectTransform>();
-        rt_back.sizeDelta = bcs.Size + new Vector2(bcs.Size.x * 0.28f , bcs.Size.y * 0.25f);
-
-        barChart = (GameObject)Instantiate(BarChartPrefab);
-        RectTransform rt = barChart.GetComponent<RectTransform>();
-        rt.sizeDelta = bcs.Size;
-        barChart.name = bcs.BarChartName;
-
-        barChart.GetComponent<RectTransform>().SetParent(panel.transform);
-        if (bcs.Parent == "Canvas")
+        if (!isPressedBefore.ContainsKey(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name))
         {
-            DashboardElementBackground.transform.SetPositionAndRotation(panel.transform.localPosition + bcs.Position, new Quaternion(0, 0, 0, 0));
-            barChart.GetComponent<RectTransform>().SetPositionAndRotation(panel.transform.localPosition + bcs.Position, new Quaternion(0, 0, 0, 0));
+            string pressedButtonName = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
+            isPressedBefore[pressedButtonName] = false;
+        }
+        if (!isPressedBefore[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name])
+        {
+            var panel = GameObject.Find("Canvas");
+            var panel2 = GameObject.Find(bcs.Parent);
+
+            DashboardElementBackground = (GameObject)Instantiate(DashboardElementBackgroundPrefab1);
+            DashboardElementBackground.transform.SetParent(panel.transform);
+            DashboardElementBackground.name = bcs.BarChartName + "Background";
+
+           RectTransform rt_back = DashboardElementBackground.GetComponent<RectTransform>();
+            rt_back.sizeDelta = bcs.Size + new Vector2(bcs.Size.x * 0.28f, bcs.Size.y * 0.25f);
+
+            barChart = (GameObject)Instantiate(BarChartPrefab);
+            RectTransform rt = barChart.GetComponent<RectTransform>();
+            rt.sizeDelta = bcs.Size;
+            barChart.name = bcs.BarChartName;
+
+            barChart.GetComponent<RectTransform>().SetParent(panel.transform);
+            if (bcs.Parent == "Canvas")
+            {
+                DashboardElementBackground.transform.SetPositionAndRotation(panel.transform.localPosition + bcs.Position, new Quaternion(0, 0, 0, 0));
+                barChart.GetComponent<RectTransform>().SetPositionAndRotation(panel.transform.localPosition + bcs.Position, new Quaternion(0, 0, 0, 0));
+            }
+            else
+            {
+                DashboardElementBackground.transform.SetPositionAndRotation(panel2.transform.localPosition + panel.transform.localPosition + bcs.Position, new Quaternion(0, 0, 0, 0));
+                barChart.GetComponent<RectTransform>().SetPositionAndRotation(panel2.transform.localPosition + panel.transform.localPosition + bcs.Position, new Quaternion(0, 0, 0, 0));
+            }
+
+            barChart.GetComponent<CanvasBarChart>().AxisSeperation = 100f;
+            barChart.GetComponent<CanvasBarChart>().BarSeperation = bcs.BarSeperation;
+            barChart.GetComponent<CanvasBarChart>().BarSize = bcs.BarSize;
+            barChart.GetComponent<ItemLabels>().FontSize = bcs.ItemLabelsFontSize;
+            barChart.GetComponent<CategoryLabels>().FontSize = bcs.CategoryLabelsFontSize;
+            barChart.GetComponent<GroupLabels>().FontSize = bcs.GroupLabelsFontSize;
+            barChart.GetComponent<BarAnimation>().enabled = bcs.BarAnimation;
+            onScreen[bcs.BarChartName] = barChart;
+            onScreen[DashboardElementBackground.name] = DashboardElementBackground;
+            isPressedBefore[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name] = true;
         }
         else
         {
-            DashboardElementBackground.transform.SetPositionAndRotation(panel2.transform.localPosition + panel.transform.localPosition + bcs.Position, new Quaternion(0, 0, 0, 0));
-            barChart.GetComponent<RectTransform>().SetPositionAndRotation(panel2.transform.localPosition + panel.transform.localPosition + bcs.Position, new Quaternion(0, 0, 0, 0));
+            //Destroy the object
+            Destroy(onScreen[bcs.BarChartName]);
+            //Also destroy the background
+            Destroy(onScreen[bcs.BarChartName + "Background"]);
+            //Remove the destroyed objects from the Onscreen dictionary
+            onScreen.Remove(bcs.BarChartName);
+            onScreen.Remove(bcs.BarChartName + "Background");
+            //Set the buttons state to false indicating that it is not pressed yet
+            isPressedBefore[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name] = false;
         }
-
-        barChart.GetComponent<CanvasBarChart>().AxisSeperation = 100f;
-        barChart.GetComponent<CanvasBarChart>().BarSeperation = bcs.BarSeperation;
-        barChart.GetComponent<CanvasBarChart>().BarSize = bcs.BarSize;
-        barChart.GetComponent<ItemLabels>().FontSize = bcs.ItemLabelsFontSize;
-        barChart.GetComponent<CategoryLabels>().FontSize = bcs.CategoryLabelsFontSize;
-        barChart.GetComponent<GroupLabels>().FontSize = bcs.GroupLabelsFontSize;
-        barChart.GetComponent<BarAnimation>().enabled = bcs.BarAnimation;
-        // barChart.GetComponent<RectTransform>().rotation = new Quaternion(0, 0, -180f, 0);
     }
     public void CreateGraphChart(GraphChartSpecifications gcs)
     {
-       
-        graphChart = (GameObject)Instantiate(GraphChartPrefab);
-        RectTransform rt = graphChart.GetComponent<RectTransform>();
-        rt.sizeDelta = gcs.Size;
-        graphChart.name = gcs.GraphChartName;
-        graphChart.GetComponent<Text>().text = gcs.GraphChartName;
-        var panel = GameObject.Find("Canvas");
-        
-        graphChart.GetComponent<RectTransform>().SetParent(panel.transform);
-        if (gcs.Parent == "Canvas")
-            graphChart.GetComponent<RectTransform>().SetPositionAndRotation(panel.transform.localPosition + gcs.Position, new Quaternion(0, 0, 0, 0));
+        if (!isPressedBefore.ContainsKey(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name))
+        {
+            string pressedButtonName = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
+            isPressedBefore[pressedButtonName] = false;
+        }
+        if (!isPressedBefore[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name])
+        {
+            graphChart = (GameObject)Instantiate(GraphChartPrefab);
+            RectTransform rt = graphChart.GetComponent<RectTransform>();
+            rt.sizeDelta = gcs.Size;
+            graphChart.name = gcs.GraphChartName;
+            graphChart.GetComponent<Text>().text = gcs.GraphChartName;
+            var panel = GameObject.Find("Canvas");
+
+            graphChart.GetComponent<RectTransform>().SetParent(panel.transform);
+            if (gcs.Parent == "Canvas")
+                graphChart.GetComponent<RectTransform>().SetPositionAndRotation(panel.transform.localPosition + gcs.Position, new Quaternion(0, 0, 0, 0));
+            else
+            {
+                var panel2 = GameObject.Find(gcs.Parent);
+                graphChart.GetComponent<RectTransform>().SetPositionAndRotation(panel2.transform.localPosition + panel.transform.localPosition + gcs.Position, new Quaternion(0, 0, 0, 0));
+            }
+            graphChart.GetComponent<VerticalAxis>().GetComponent<Text>().fontSize = gcs.VerticalAxisFontSize;
+            graphChart.GetComponent<HorizontalAxis>().Format = gcs.HorizontalAxisFormat;
+            graphChart.GetComponent<HorizontalAxis>().GetComponent<Text>().fontSize = gcs.HorizontalAxisFontSize;
+            graphChart.GetComponent<StreamingGraph>().lineThickness = gcs.LineThickness;
+            graphChart.GetComponent<StreamingGraph>().pointSize = gcs.PointSize;
+
+            GameObject text = new GameObject();
+            text.transform.SetParent(panel.transform);
+            Text myText = text.AddComponent<Text>();
+            myText.text = gcs.GraphChartName;
+            text.transform.SetPositionAndRotation(panel.transform.localPosition + gcs.Position, new Quaternion(0, 0, 0, 0));
+            onScreen[gcs.GraphChartName] = graphChart;
+            isPressedBefore[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name] = true;
+        }
         else
         {
-            var panel2 = GameObject.Find(gcs.Parent);
-            graphChart.GetComponent<RectTransform>().SetPositionAndRotation(panel2.transform.localPosition + panel.transform.localPosition + gcs.Position, new Quaternion(0, 0, 0, 0));
+            //Destroy the object
+            Destroy(onScreen[gcs.GraphChartName]);
+            //Also destroy the background
+          //  Destroy(onScreen[bcs.BarChartName + "Background"]);
+            //Remove the destroyed objects from the Onscreen dictionary
+            onScreen.Remove(gcs.GraphChartName);
+           // onScreen.Remove(bcs.BarChartName + "Background");
+            //Set the buttons state to false indicating that it is not pressed yet
+            isPressedBefore[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name] = false;
         }
-        graphChart.GetComponent<VerticalAxis>().GetComponent<Text>().fontSize = gcs.VerticalAxisFontSize;
-        // graphChart.GetComponent<VerticalAxis>().GetComponent<Text>().
-        graphChart.GetComponent<HorizontalAxis>().Format = gcs.HorizontalAxisFormat;
-        graphChart.GetComponent<HorizontalAxis>().GetComponent<Text>().fontSize = gcs.HorizontalAxisFontSize;
-        graphChart.GetComponent<StreamingGraph>().lineThickness = gcs.LineThickness;
-        graphChart.GetComponent<StreamingGraph>().pointSize = gcs.PointSize;
-
-        GameObject text = new GameObject();
-        text.transform.SetParent(panel.transform);
-        Text myText = text.AddComponent<Text>();
-        myText.text = gcs.GraphChartName;
-        text.transform.SetPositionAndRotation(panel.transform.localPosition + gcs.Position, new Quaternion(0, 0, 0, 0));
-
     }
 }
     
