@@ -56,7 +56,7 @@ public class UIController : MonoBehaviour
     public UIController()
     {
         //size = new Vector2(200, 600);
-       isPressedBefore = new Dictionary<string, bool>();
+        isPressedBefore = new Dictionary<string, bool>();
         onScreen = new Dictionary<string, GameObject>();
         fillDummyVar();
         MS = new MenuSpecifications(parent, menuName, bNames, noOfButtons, size, ffb, menuPosition);
@@ -70,14 +70,7 @@ public class UIController : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     void Start()
     {
-        GameObject canvas_2 = new GameObject();
-        Canvas canvas2 = canvas_2.AddComponent<Canvas>();
-        canvas2.renderMode = RenderMode.WorldSpace;
-        canvas_2.name = "Canvas2";
-        canvas_2.GetComponent<RectTransform>().sizeDelta = new Vector2(2000, 2000);
-        canvas_2.GetComponent<RectTransform>().position = new Vector3(1000, 0, -700);
-        canvas_2.GetComponent<RectTransform>().Rotate(0, 90, 0);
-
+        
         menu = new GameObject();
         CreateScrollBarMenu(MS);
         CreateBarChart(bcs);
@@ -157,9 +150,7 @@ public class UIController : MonoBehaviour
             //menu.GetComponent<RectTransform>().localPosition = panel.transform.localPosition + new Vector3(-200, 0, 0);
             RectTransform rt = menu.GetComponent<RectTransform>();
             rt.sizeDelta = m.size;
-        //    GUI.Box(new Rect(0, 0, 200, 200), "sa");
             addButtonsToMenu(m);
-           // Rect rect = new Rect(0,0,200,200);
             
         }
 
