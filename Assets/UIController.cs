@@ -140,7 +140,7 @@ public class UIController : MonoBehaviour
         {
             menu = (GameObject)Instantiate(ScrollMenuPrefab);
             var panel = GameObject.Find("Canvas");
-            var panel2 = GameObject.Find(m.parent);
+          //  var panel2 = GameObject.Find(m.parent);
 
             DashboardElementBackground = (GameObject)Instantiate(DashboardElementBackgroundPrefab);
             DashboardElementBackground.transform.SetParent(panel.transform);
@@ -149,9 +149,9 @@ public class UIController : MonoBehaviour
             rt_back.sizeDelta = m.size + new Vector2(50,50);
 
             menu.name = m.menuName;
-            menu.GetComponent<RectTransform>().SetParent(panel.transform);
+            menu.GetComponent<RectTransform>().SetParent(DashboardElementBackground.transform);
 
-            menu.GetComponent<RectTransform>().SetPositionAndRotation(panel.transform.localPosition + m.menuPosition, new Quaternion(0, 0, 0, 0));
+            menu.GetComponent<RectTransform>().SetPositionAndRotation(DashboardElementBackground.transform.position + m.menuPosition, new Quaternion(0, 0, 0, 0));
             RectTransform rt = menu.GetComponent<RectTransform>();
             rt.sizeDelta = m.size;
             addButtonsToMenu(m);

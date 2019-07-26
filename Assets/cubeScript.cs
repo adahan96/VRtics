@@ -24,13 +24,15 @@ public class cubeScript : MonoBehaviour
     {
         Debug.Log("sa");
     }
-    void OnVRTriggerDown()
+    void OnVRTriggerDown(Vector3 RaycastPosition)
     {
 
         Debug.Log("TRIGGERED BEING PRESSED!!!");
         //  UIController boss = new UIController();
         //  boss.CreateBarChart(new BarChartSpecifications(new Vector3(350, 0, 0), new Vector2(317, 317), "BarChart78", 38.77f, 33.77f, 16, 16, 16, true, "SubMenu1"));
-        this.transform.position += new Vector3(2, 0, 0);
+        this.transform.parent.position = RaycastPosition;
+      //  this.transform.GetChild(0).transform.parent.position = this.transform.position;
+       
     }
     void OnVRTriggerReleased()
     {

@@ -319,27 +319,44 @@ namespace UnityEngine.EventSystems
         /// Process the current mouse press.
         /// </summary>
         GameObject go;
+        bool dragging = false;
         private void ProcessMousePress(MouseButtonEventData data)
         {
+           
             var pointerEvent = data.buttonData;
             var currentOverGo = pointerEvent.pointerCurrentRaycast.gameObject;
-
-          //  go = pointerEvent.pointerCurrentRaycast.gameObject;
-           // go.SendMessage("OnVREnter");
-
+           
+            //  go = pointerEvent.pointerCurrentRaycast.gameObject;
+            // go.SendMessage("OnVREnter");
+            /*
             if (go != pointerEvent.pointerCurrentRaycast.gameObject)
             {
                 if(go != null)
                     go.SendMessage("OnVRExit");
                 go = pointerEvent.pointerCurrentRaycast.gameObject;
                 Debug.Log(pointerEvent.pointerCurrentRaycast.gameObject);
+                Debug.Log("AYYYYYYYYYYYYYYYY FAM");
+                Debug.Log(pointerEvent.pointerCurrentRaycast.worldPosition);
+                Debug.Log("AYYYYYYYYYYYYYYYY FAM");
+                Debug.Log(pointerEvent.pointerCurrentRaycast.gameObject.transform.parent.position);
                 go.SendMessage("OnVREnter");
+            }*/
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+            {
+                go = pointerEvent.pointerCurrentRaycast.gameObject;
+                dragging = true;
+            }
+            if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger))
+            {
+                dragging = false;
             }
 
-           if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+
+            if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) && dragging)
            {
-                go = pointerEvent.pointerCurrentRaycast.gameObject; 
-                go.transform.SendMessage("OnVRTriggerDown");
+                
+                
+                go.transform.SendMessage("OnVRTriggerDown", pointerEvent.pointerCurrentRaycast.worldPosition);
            }
           //  else
            // {
