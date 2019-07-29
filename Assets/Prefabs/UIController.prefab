@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3975087635023777989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3975087635023777987}
+  - component: {fileID: 3975087635023777986}
+  m_Layer: 0
+  m_Name: UIController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3975087635023777987
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3975087635023777989}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 28.9533, y: 31.591291, z: 192.07487}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3975087635023777986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3975087635023777989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62bdfb2a1273ee94080f4496b357470e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScrollMenuPrefab: {fileID: 5657192123987421205, guid: 2ee690b706edb4348a50e43bfc5ac708,
+    type: 3}
+  menu: {fileID: 0}
+  barChart: {fileID: 0}
+  BarChartPrefab: {fileID: 121802, guid: db9db3039e26de14badcbb60f1d89faf, type: 3}
+  graphChart: {fileID: 0}
+  GraphChartPrefab: {fileID: 3064253842966264084, guid: b304f723ed57d2b4e8bfbda8e9068fd4,
+    type: 3}
+  DashboardElementBackground: {fileID: 0}
+  DashboardElementBackgroundPrefab: {fileID: 2496627598688271468, guid: 9b4ec97911741ed428626adcc8646354,
+    type: 3}
+  DashboardElementBackgroundPrefab1: {fileID: 2496627598688271468, guid: 9b4ec97911741ed428626adcc8646354,
+    type: 3}
+  buttons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  buttonPrefab: {fileID: 4881700223382916197, guid: 233fc78ee2b248646a5f031db221c63c,
+    type: 3}

@@ -320,6 +320,7 @@ namespace UnityEngine.EventSystems
         /// </summary>
         GameObject go;
         bool dragging = false;
+
         private void ProcessMousePress(MouseButtonEventData data)
         {
            
@@ -328,7 +329,7 @@ namespace UnityEngine.EventSystems
            
             //  go = pointerEvent.pointerCurrentRaycast.gameObject;
             // go.SendMessage("OnVREnter");
-            /*
+            
             if (go != pointerEvent.pointerCurrentRaycast.gameObject)
             {
                 if(go != null)
@@ -340,7 +341,7 @@ namespace UnityEngine.EventSystems
                 Debug.Log("AYYYYYYYYYYYYYYYY FAM");
                 Debug.Log(pointerEvent.pointerCurrentRaycast.gameObject.transform.parent.position);
                 go.SendMessage("OnVREnter");
-            }*/
+            }
             if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
             {
                 go = pointerEvent.pointerCurrentRaycast.gameObject;

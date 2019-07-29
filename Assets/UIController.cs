@@ -38,7 +38,6 @@ public class UIController : MonoBehaviour
         ffb2.Add(() => CreateBarChart(bcs2));
     }
     public static MenuSpecifications ms_child;
-
     public static string menuName = "MainMenu";
     public static int noOfButtons = 6; // will come from JSON. This is TO BE DELETED.
     public static Vector2 size = new Vector2(200, 200); // will come from JSON. This is TO BE DELETED.
@@ -71,8 +70,8 @@ public class UIController : MonoBehaviour
     void Start()
     {
         
-        menu = new GameObject();
-        CreateScrollBarMenu(MS);
+      //  menu = new GameObject();
+      //  CreateScrollBarMenu(MS);
     //    CreateBarChart(bcs);
       //  CreateScrollBarMenu(new MenuSpecifications("Canvas2", "SubMenu1c2", new string[] { "Graph Chart 1", "Bar Chart 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(250, 0, 0)));
         //CreateBarChart(bcs2);
@@ -87,7 +86,7 @@ public class UIController : MonoBehaviour
 
     }
     
-    void CreateScrollBarMenu(MenuSpecifications m)
+    public void CreateScrollBarMenu(MenuSpecifications m)
     {
         if (m.parent != "Canvas")
         {
@@ -160,7 +159,7 @@ public class UIController : MonoBehaviour
 
     }
     public GameObject buttonPrefab;
-    void addButtonsToMenu(MenuSpecifications m)
+    private void addButtonsToMenu(MenuSpecifications m)
     {
         buttons = new GameObject[m.noOfButtons];
         for (int i = 0; i < m.buttonNames.Length; i += 1)
