@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2532951695757938557}
   - component: {fileID: 57831197283441427}
   - component: {fileID: 8566341977422995682}
+  - component: {fileID: 1457194281094348875}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -91,6 +92,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &1457194281094348875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3605913904581611170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed0d711b1a606dc4fa918836314fc481, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Uicont: {fileID: 3975087635023777986, guid: 3abb2d4649f8d4b4782baf961823ce27, type: 3}
 --- !u!1 &3990165592945026252
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,8 +206,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6508219852117730340}
-  - component: {fileID: 8591608876311771819}
-  - component: {fileID: 8206215560181907188}
   m_Layer: 0
   m_Name: LocationPoint
   m_TagString: Untagged
@@ -217,28 +229,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8591608876311771819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9182575444671078644}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fcfd130871444541891caa350b7437d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8206215560181907188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9182575444671078644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed0d711b1a606dc4fa918836314fc481, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Uicont: {fileID: 3975087635023777986, guid: 3abb2d4649f8d4b4782baf961823ce27, type: 3}

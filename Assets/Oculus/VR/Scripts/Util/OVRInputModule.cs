@@ -320,31 +320,31 @@ namespace UnityEngine.EventSystems
         /// </summary>
         GameObject go;
         bool dragging = false;
+        GameObject hoverGo = null;
 
         private void ProcessMousePress(MouseButtonEventData data)
         {
            
             var pointerEvent = data.buttonData;
             var currentOverGo = pointerEvent.pointerCurrentRaycast.gameObject;
+
            
             //  go = pointerEvent.pointerCurrentRaycast.gameObject;
             // go.SendMessage("OnVREnter");
             
-            if (go != pointerEvent.pointerCurrentRaycast.gameObject)
+            if (hoverGo != pointerEvent.pointerCurrentRaycast.gameObject)
             {
-                if(go != null)
-                    go.SendMessage("OnVRExit");
-                go = pointerEvent.pointerCurrentRaycast.gameObject;
-                Debug.Log(pointerEvent.pointerCurrentRaycast.gameObject);
-                Debug.Log("AYYYYYYYYYYYYYYYY FAM");
-                Debug.Log(pointerEvent.pointerCurrentRaycast.worldPosition);
-                Debug.Log("AYYYYYYYYYYYYYYYY FAM");
-                Debug.Log(pointerEvent.pointerCurrentRaycast.gameObject.transform.parent.position);
-                go.SendMessage("OnVREnter");
+                if(hoverGo != null)
+                    hoverGo.SendMessage("OnVRExit");
+                hoverGo = pointerEvent.pointerCurrentRaycast.gameObject;
+                hoverGo.SendMessage("OnVREnter");
             }
+            
             if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
             {
                 go = pointerEvent.pointerCurrentRaycast.gameObject;
+                go.transform.SendMessage("OnVRTriggerPressed", pointerEvent.pointerCurrentRaycast.worldPosition);
+                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(go);
                 dragging = true;
             }
             if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger))

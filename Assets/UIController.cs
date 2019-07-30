@@ -69,15 +69,16 @@ public class UIController : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     void Start()
     {
-        
-      //  menu = new GameObject();
-      //  CreateScrollBarMenu(MS);
-    //    CreateBarChart(bcs);
-      //  CreateScrollBarMenu(new MenuSpecifications("Canvas2", "SubMenu1c2", new string[] { "Graph Chart 1", "Bar Chart 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(250, 0, 0)));
+
+        //  menu = new GameObject();
+        //  CreateScrollBarMenu(MS);
+        //    CreateBarChart(bcs);
+        //  CreateScrollBarMenu(new MenuSpecifications("Canvas2", "SubMenu1c2", new string[] { "Graph Chart 1", "Bar Chart 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(250, 0, 0)));
         //CreateBarChart(bcs2);
         //  GameObject.Find("SubMenu").GetComponent<Button>().onClick.Invoke();
-      //          CreateGraphChart(gcs);
-
+        //          CreateGraphChart(gcs);
+        Debug.Log(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name);
+        Debug.Log("123");
     }
 
     // Update is called once per frame
@@ -137,24 +138,48 @@ public class UIController : MonoBehaviour
 
         else
         {
+            if (!isPressedBefore.ContainsKey(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name))
+            {
+                string pressedButtonName = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
+                isPressedBefore[pressedButtonName] = false;
+            }
             menu = (GameObject)Instantiate(ScrollMenuPrefab);
-            var panel = GameObject.Find("Canvas");
-          //  var panel2 = GameObject.Find(m.parent);
+            var panel = GameObject.Find(m.parent);
+            //  var panel2 = GameObject.Find(m.parent);
+            if (!isPressedBefore[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name])
+            {
+                DashboardElementBackground = (GameObject)Instantiate(DashboardElementBackgroundPrefab);
+                DashboardElementBackground.name = m.menuName + "Background";
+                DashboardElementBackground.transform.SetParent(panel.transform);
+                DashboardElementBackground.transform.SetPositionAndRotation(panel.transform.localPosition + m.menuPosition, new Quaternion(0, 0, 0, 0));
+                RectTransform rt_back = DashboardElementBackground.GetComponent<RectTransform>();
+                rt_back.sizeDelta = m.size + new Vector2(50, 50);
 
-            DashboardElementBackground = (GameObject)Instantiate(DashboardElementBackgroundPrefab);
-            DashboardElementBackground.transform.SetParent(panel.transform);
-            DashboardElementBackground.transform.SetPositionAndRotation(panel.transform.localPosition + m.menuPosition, new Quaternion(0, 0, 0, 0));
-            RectTransform rt_back = DashboardElementBackground.GetComponent<RectTransform>();
-            rt_back.sizeDelta = m.size + new Vector2(50,50);
+                menu.name = m.menuName;
+                menu.GetComponent<RectTransform>().SetParent(DashboardElementBackground.transform);
 
-            menu.name = m.menuName;
-            menu.GetComponent<RectTransform>().SetParent(DashboardElementBackground.transform);
+                menu.GetComponent<RectTransform>().SetPositionAndRotation(DashboardElementBackground.transform.position + m.menuPosition, new Quaternion(0, 0, 0, 0));
+                RectTransform rt = menu.GetComponent<RectTransform>();
+                rt.sizeDelta = m.size;
 
-            menu.GetComponent<RectTransform>().SetPositionAndRotation(DashboardElementBackground.transform.position + m.menuPosition, new Quaternion(0, 0, 0, 0));
-            RectTransform rt = menu.GetComponent<RectTransform>();
-            rt.sizeDelta = m.size;
-            addButtonsToMenu(m);
-            
+                onScreen[m.menuName] = menu;
+                onScreen[m.menuName + "Background"] = DashboardElementBackground;
+
+                addButtonsToMenu(m);
+            }
+            else
+            {
+                //Destroy the object
+                Destroy(onScreen[m.menuName]);
+                //Also destroy the background
+                Destroy(onScreen[m.menuName + "Background"]);
+                //Remove the destroyed objects from the Onscreen dictionary
+                onScreen.Remove(m.menuName);
+                onScreen.Remove(m.menuName + "Background");
+                //Set the buttons state to false indicating that it is not pressed yet
+                isPressedBefore[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name] = false;
+            }
+
         }
 
     }

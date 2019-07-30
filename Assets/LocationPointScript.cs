@@ -31,7 +31,9 @@ public class LocationPointScript : MonoBehaviour
         MS = new MenuSpecifications(parent, menuName, bNames, noOfButtons, size, ffb, menuPosition);
         Debug.Log(OVRGazePointer.instance.transform.position);
         Uicont = FindObjectOfType(typeof(UIController)) as UIController;
-    
+        //   Uicont.CreateScrollBarMenu(MS);
+      //  OnVRTriggerPressed(new Vector3(0, 0, 0));
+
     }
 
     // Update is called once per frame
@@ -41,13 +43,14 @@ public class LocationPointScript : MonoBehaviour
     }
     void OnVREnter()
     {
-        GameObject.Find("HoverText").GetComponent<Text>().text = "Press the Trigger to view the graphs";
+     //   Uicont.CreateScrollBarMenu(MS);
+        GameObject.Find("HoverText").GetComponent<Text>().text = "Merih Asansör Ankara Press trigger to view graphs";
     }
     void OnVRExit()
     {
         GameObject.Find("HoverText").GetComponent<Text>().text = "";
     }
-    void OnVRTriggerDown(Vector3 RaycastPosition)
+    void OnVRTriggerPressed(Vector3 RaycastPosition)
     {
         Uicont.CreateScrollBarMenu(MS);
     //  UIController boss = new UIController();
