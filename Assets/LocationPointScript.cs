@@ -56,6 +56,12 @@ public class LocationPointScript : MonoBehaviour
     //  UIController boss = new UIController();
     //  boss.CreateBarChart(new BarChartSpecifications(new Vector3(350, 0, 0), new Vector2(317, 317), "BarChart78", 38.77f, 33.77f, 16, 16, 16, true, "SubMenu1"));
     }
+    void OnVRTriggerPressedAgain()
+    {
+        Uicont.DestroyMenu(MS);
+        //  UIController boss = new UIController();
+        //  boss.CreateBarChart(new BarChartSpecifications(new Vector3(350, 0, 0), new Vector2(317, 317), "BarChart78", 38.77f, 33.77f, 16, 16, 16, true, "SubMenu1"));
+    }
     void OnVRTriggerReleased()
     {
         //    UIController boss = new UIController();

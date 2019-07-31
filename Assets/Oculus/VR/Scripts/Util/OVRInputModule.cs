@@ -91,7 +91,10 @@ namespace UnityEngine.EventSystems
         private Vector2 m_MousePosition;
 
         protected OVRInputModule()
-        {}
+        {
+            dragging = false;
+            isPressedBefore = new Dictionary<string, bool>();
+        }
 
 #if UNITY_EDITOR
         protected override void Reset()
@@ -319,8 +322,10 @@ namespace UnityEngine.EventSystems
         /// Process the current mouse press.
         /// </summary>
         GameObject go;
-        bool dragging = false;
-        GameObject hoverGo = null;
+        bool dragging;
+        GameObject hoverGo;
+        Dictionary<string, bool> isPressedBefore; // if true call "OVRTriggerPressed" if false call "OVTriggerPressedAgain"
+        bool flag = true;
 
         private void ProcessMousePress(MouseButtonEventData data)
         {
@@ -342,10 +347,28 @@ namespace UnityEngine.EventSystems
             
             if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
             {
+           
                 go = pointerEvent.pointerCurrentRaycast.gameObject;
-                go.transform.SendMessage("OnVRTriggerPressed", pointerEvent.pointerCurrentRaycast.worldPosition);
-                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(go);
+                if (!isPressedBefore.ContainsKey(go.transform.name))
+                {
+                    string clickedObjectName = go.transform.name;
+                    isPressedBefore[clickedObjectName] = false;
+                }
+
+                if (isPressedBefore[go.transform.name] == false)
+                {
+                    go.transform.SendMessage("OnVRTriggerPressed", pointerEvent.pointerCurrentRaycast.worldPosition);
+                    isPressedBefore[go.transform.name] = true;
+                }
+                else
+                {
+                    go.transform.SendMessage("OnVRTriggerPressedAgain");
+                    isPressedBefore[go.transform.name] = false;
+                }
                 dragging = true;
+                flag = false;
+ 
+        
             }
             if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger))
             {
@@ -486,9 +509,9 @@ namespace UnityEngine.EventSystems
             ProcessDrag(leftButtonData.buttonData);
 
             // Now process right / middle clicks
-            ProcessMousePress(mouseData.GetButtonState(PointerEventData.InputButton.Right).eventData);
+       //     ProcessMousePress(mouseData.GetButtonState(PointerEventData.InputButton.Right).eventData);
             ProcessDrag(mouseData.GetButtonState(PointerEventData.InputButton.Right).eventData.buttonData);
-            ProcessMousePress(mouseData.GetButtonState(PointerEventData.InputButton.Middle).eventData);
+        //    ProcessMousePress(mouseData.GetButtonState(PointerEventData.InputButton.Middle).eventData);
             ProcessDrag(mouseData.GetButtonState(PointerEventData.InputButton.Middle).eventData.buttonData);
 
             if (!Mathf.Approximately(leftButtonData.buttonData.scrollDelta.sqrMagnitude, 0.0f))

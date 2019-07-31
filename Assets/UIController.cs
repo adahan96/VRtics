@@ -138,16 +138,11 @@ public class UIController : MonoBehaviour
 
         else
         {
-            if (!isPressedBefore.ContainsKey(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name))
-            {
-                string pressedButtonName = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
-                isPressedBefore[pressedButtonName] = false;
-            }
+           
             menu = (GameObject)Instantiate(ScrollMenuPrefab);
             var panel = GameObject.Find(m.parent);
             //  var panel2 = GameObject.Find(m.parent);
-            if (!isPressedBefore[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name])
-            {
+           
                 DashboardElementBackground = (GameObject)Instantiate(DashboardElementBackgroundPrefab);
                 DashboardElementBackground.name = m.menuName + "Background";
                 DashboardElementBackground.transform.SetParent(panel.transform);
@@ -166,21 +161,19 @@ public class UIController : MonoBehaviour
                 onScreen[m.menuName + "Background"] = DashboardElementBackground;
 
                 addButtonsToMenu(m);
-            }
-            else
-            {
-                //Destroy the object
-                Destroy(onScreen[m.menuName]);
-                //Also destroy the background
-                Destroy(onScreen[m.menuName + "Background"]);
-                //Remove the destroyed objects from the Onscreen dictionary
-                onScreen.Remove(m.menuName);
-                onScreen.Remove(m.menuName + "Background");
-                //Set the buttons state to false indicating that it is not pressed yet
-                isPressedBefore[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name] = false;
-            }
 
         }
+
+    }
+    public void DestroyMenu(MenuSpecifications m)
+    {
+        //Destroy the object
+        Destroy(onScreen[m.menuName]);
+        //Also destroy the background
+        Destroy(onScreen[m.menuName + "Background"]);
+        //Remove the destroyed objects from the Onscreen dictionary
+        onScreen.Remove(m.menuName);
+        onScreen.Remove(m.menuName + "Background");
 
     }
     public GameObject buttonPrefab;
