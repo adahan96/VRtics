@@ -18,7 +18,7 @@ public class MoveCanvas : MonoBehaviour
         left = GameObject.Find("Canvas_Left");
         right = GameObject.Find("Canvas_Right");
         leftleft = GameObject.Find("Canvas_Left_Left");
-        MoveRight();  
+     //   MoveRight();  
     }
     TimeSpan startTimeSpan = TimeSpan.Zero;
     TimeSpan periodTimeSpan = TimeSpan.FromSeconds(5);
@@ -26,12 +26,12 @@ public class MoveCanvas : MonoBehaviour
     int lapse = 0;
     void Update()
     {
-        lapse++;
-        if (lapse % 360 == 0)
-        {
-            MoveLeft();
-            lapse = 0;
-        }
+      //  lapse++;
+      //  if (lapse % 360 == 0)
+      //  {
+       //     MoveLeft();
+       //     lapse = 0;
+       // }
         
 
       
