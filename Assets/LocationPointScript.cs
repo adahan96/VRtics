@@ -50,7 +50,7 @@ public class LocationPointScript : MonoBehaviour
         IT = FindObjectOfType(typeof(InfoText)) as InfoText;
         fillDummyVar();
         MS = new MenuSpecifications("Canvas_Right", menuName, bNames, noOfButtons, size, ffb, menuPosition);
-        ms_child = new MenuSpecifications("Canvas_Right", "MainMenu", "SubMenu1", new string[] { "Graph Chart 1", "Bar Chart 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(250, 0, 0));
+        ms_child = new MenuSpecifications("Canvas_Left", "MainMenu", "SubMenu1", new string[] { "Graph Chart 1", "Bar Chart 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(250, 0, 0));
         bcs = new BarChartSpecifications(new Vector3(-350, 0, 0), new Vector2(317, 317), "BarChart77", 48.77f, 23.77f, 13, 13, 13, true, menuName, "Canvas_Right");
         bcs2 = new BarChartSpecifications(new Vector3(350, 0, 0), new Vector2(317, 317), "BarChart78", 38.77f, 33.77f, 16, 16, 16, true, "SubMenu1", "Canvas_Right");
         gcs = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector2(300, 200), "Ornek Grafik", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "MainMenu", "Canvas_Left");

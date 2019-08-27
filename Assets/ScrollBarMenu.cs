@@ -113,6 +113,23 @@ public class ScrollBarMenu : MonoBehaviour
                 if (panel2.transform.parent != panel.transform)
                 {
                     DashboardElementBackground.transform.localPosition = m.menuPosition;
+
+                    Transform currentCanvas = panel2.transform.parent;
+                    Transform focusCanvas = panel.transform;
+
+                    Vector3 curLoc = currentCanvas.position;
+                    Quaternion curRot = currentCanvas.rotation;
+                    Vector3 focusLoc = focusCanvas.position;
+                    Quaternion focusRot = focusCanvas.rotation;
+
+                    currentCanvas.position = focusLoc;
+                    currentCanvas.rotation = focusRot;
+                    focusCanvas.position = curLoc;
+                    focusCanvas.rotation = curRot;
+
+                    
+                    
+
                 }                    
                 else
                 {
