@@ -24,11 +24,7 @@ public class Controller : MonoBehaviour
  //       Debug.Log(d1);
     }
 
-    public void LoadScene(string sceneName)
-    {
-        Debug.Log(sceneName + " Has Been Loaded");
-        SceneManager.LoadScene(sceneName);
-    }
+  
 
     public void QuitGame()
     {
@@ -41,16 +37,6 @@ public class Controller : MonoBehaviour
 #else
             Application.Quit();
 #endif
-    }
-
-    public void MainMenu(string sceneMenu)
-    {
-        SceneManager.LoadScene(sceneMenu);
-    }
-
-    public void DoSth()
-    {
-        Debug.Log("I see you.");
     }
     public GameObject buttonPrefab;
     //public GameObject testPrefab = (GameObject)Resources.Load("/Button7-2.png");
@@ -72,8 +58,6 @@ public class Controller : MonoBehaviour
                 buttons[i].GetComponent<RectTransform>().SetParent(panel.transform);
                 buttons[i].GetComponent<RectTransform>().SetInsetAndSizeFromParentEdge(RectTransform.Edge.Bottom, i*35, 30);
                 buttons[i].layer = 5;
-                //  button.GetComponent<RectTransform>().anchorMax = new Vector2(30.0f, 30.0f);
-                //  button.GetComponent<RectTransform>().anchorMin = new Vector2(10.0f, 10.0f);
                 buttons[i].GetComponentInChildren<Text>().text = "Sıcaklık";
                 buttons[i].GetComponent<Button>().onClick.AddListener(delegate() { MakeButton("aasd"); });
             }

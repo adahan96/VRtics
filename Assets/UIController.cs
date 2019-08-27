@@ -20,7 +20,7 @@ public class UIController : MonoBehaviour
     public GameObject DashboardElementBackgroundPrefab1;
 
     // TO BE DELETED
-
+    
     static string[] bNames = { "Bar Chart 1", "SubMenu", "Quit VRtics", "Dummy Button", "Dummy Button2" , "Dummy Button3" };
     List<UnityEngine.Events.UnityAction> ffb = new List<UnityEngine.Events.UnityAction>();
     List<UnityEngine.Events.UnityAction> ffb2 = new List<UnityEngine.Events.UnityAction>();
@@ -60,9 +60,9 @@ public class UIController : MonoBehaviour
         fillDummyVar();
         MS = new MenuSpecifications(parent, menuName, bNames, noOfButtons, size, ffb, menuPosition);
         ms_child = new MenuSpecifications("MainMenu", "SubMenu1", new string[] { "Graph Chart 1", "Bar Chart 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(250, 0, 0));
-        bcs = new BarChartSpecifications(new Vector3(-350, 0, 0), new Vector2(317,317), "BarChart77", 48.77f, 23.77f, 13, 13, 13, true, menuName);
-        bcs2 = new BarChartSpecifications(new Vector3(350, 0, 0), new Vector2(317, 317), "BarChart78", 38.77f, 33.77f, 16, 16, 16, true, "SubMenu1");
-        gcs = new GraphChartSpecifications(new Vector3(-250, -350, 0), new Vector2(600, 400), "Ornek Grafik", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "SubMenu1");
+        bcs = new BarChartSpecifications(new Vector3(-350, 0, 0), new Vector2(317,317), "BarChart77", 48.77f, 23.77f, 13, 13, 13, true, menuName, "Canvas_Right");
+        bcs2 = new BarChartSpecifications(new Vector3(350, 0, 0), new Vector2(317, 317), "BarChart78", 38.77f, 33.77f, 16, 16, 16, true, "SubMenu1", "Canvas_Right");
+        gcs = new GraphChartSpecifications(new Vector3(-250, -350, 0), new Vector2(600, 400), "Ornek Grafik", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "SubMenu1", "Canvas_Right");
 
     }
     // Start is called before the first frame update
@@ -77,8 +77,8 @@ public class UIController : MonoBehaviour
         //CreateBarChart(bcs2);
         //  GameObject.Find("SubMenu").GetComponent<Button>().onClick.Invoke();
         //          CreateGraphChart(gcs);
-        Debug.Log(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name);
-        Debug.Log("123");
+      //  Debug.Log(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name);
+   //     Debug.Log("123");
     }
 
     // Update is called once per frame

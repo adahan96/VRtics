@@ -7,7 +7,7 @@ using System;
 public class StreamingGraph : MonoBehaviour
 {
     public GraphChart Graph;
-    public int TotalPoints = 5;
+    public int TotalPoints;
     float lastTime = 0f;
     float lastX = 0f;
     public static string category = "sa";
@@ -19,13 +19,13 @@ public class StreamingGraph : MonoBehaviour
     public Material pointMaterial;
     public Material lineMaterial;
     public double pointSize = 11.3;
+    public string[] categories;
 
 
  
     void Start()
     {
         
-        Debug.Log("UPDATE UPDATE UPDATE");
         Graph = GetComponent<GraphChart>();
       //  GetComponent<HorizontalAxis>().Format
         Graph.DataSource.AddCategory("sa", lineMaterial, lineThickness, lineTiling, innerFill, strechFill, pointMaterial, pointSize);
@@ -36,13 +36,17 @@ public class StreamingGraph : MonoBehaviour
         Graph.DataSource.ClearCategory("Player 1"); // clear the "Player 1" category. this category is defined using the GraphChart inspector
     //    Graph.DataSource.ClearCategory("P2"); // clear the "Player 2" category. this category is defined using the GraphChart inspector
 
+       // for (int i = 0; i < TotalPoints; i++)  //add random points to the graph
+      //  {
+     //       Graph.DataSource.AddPointToCategory("sa", System.DateTime.Now - System.TimeSpan.FromSeconds(x), UnityEngine.Random.value * 20f + 10f); // each time we call AddPointToCategory 
+    //       Graph.DataSource.AddPointToCategory("Player 1", System.DateTime.Now  - System.TimeSpan.FromSeconds(x), UnityEngine.Random.value * 10f); // each time we call AddPointToCategory 
+    //        x -= UnityEngine.Random.value * 3f;
+    //        lastX = x;
+    //    }
+
         for (int i = 0; i < TotalPoints; i++)  //add random points to the graph
         {
-            Graph.DataSource.AddPointToCategory("sa", System.DateTime.Now - System.TimeSpan.FromSeconds(x), UnityEngine.Random.value * 20f + 10f); // each time we call AddPointToCategory 
-            Debug.Log("???");
-           Graph.DataSource.AddPointToCategory("Player 1", System.DateTime.Now  - System.TimeSpan.FromSeconds(x), UnityEngine.Random.value * 10f); // each time we call AddPointToCategory 
-            x -= UnityEngine.Random.value * 3f;
-            lastX = x;
+            Graph.DataSource.AddCategory(categories[i], lineMaterial, lineThickness, lineTiling, innerFill, strechFill, pointMaterial, pointSize);
         }
         
         GetComponent<GraphChart>().DataSource.HorizontalViewOrigin = (DateTime.Today - new DateTime(1970, 1, 1)).TotalSeconds + (DateTime.Now - DateTime.Today).TotalSeconds;
@@ -62,11 +66,19 @@ public class StreamingGraph : MonoBehaviour
             lastX += UnityEngine.Random.value * 3f;
            
 //            System.DateTime t = ChartDateUtility.ValueToDate(lastX);
-           Graph.DataSource.AddPointToCategoryRealtime("sa", System.DateTime.Now, UnityEngine.Random.value * 50f + 10f, 2f); // each time we call AddPointToCategory 
-            Graph.DataSource.AddPointToCategoryRealtime("Player 1", System.DateTime.Now, UnityEngine.Random.value * 50f + 10f, 2f); // each time we call AddPointToCategory 
-           // Graph.DataSource.AddPointToCategoryRealtime("P2", System.DateTime.Now, UnityEngine.Random.value * 10f, 2f); // each time we call AddPointToCategory
-          // GetComponent<HorizontalAxis>().
-        }
+
+         //  Graph.DataSource.AddPointToCategoryRealtime("sa", System.DateTime.Now, UnityEngine.Random.value * 50f + 10f, 2f); // each time we call AddPointToCategory 
+//            Graph.DataSource.AddPointToCategoryRealtime("Player 1", System.DateTime.Now, UnityEngine.Random.value * 50f + 10f, 2f); // each time we call AddPointToCategory
+
+            for (int i = 0; i < TotalPoints; i++)  //add random points to the graph
+            {
+                Graph.DataSource.AddPointToCategoryRealtime(categories[i], System.DateTime.Now, UnityEngine.Random.value * 50f + 10f, 2f); // each time we call AddPointToCategory
+            }
+
+
+                // Graph.DataSource.AddPointToCategoryRealtime("P2", System.DateTime.Now, UnityEngine.Random.value * 10f, 2f); // each time we call AddPointToCategory
+                // GetComponent<HorizontalAxis>().
+            }
 
     }
 }

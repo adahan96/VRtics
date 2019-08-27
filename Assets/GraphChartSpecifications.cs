@@ -14,8 +14,9 @@ public struct GraphChartSpecifications
     public double LineThickness { get; set; }
     public double PointSize { get; set; }
     public string Parent { get; set; }
+    public string Canvas { get; set; }
 
-    public GraphChartSpecifications(Vector3 Position, Vector2 Size, string GraphChartName, float VerticalAxisTextSeperation, int VerticalAxisFontSize, AxisFormat HorizontalAxisFormat, float HorizontalAxisTextSeperation, int HorizontalAxisFontSize, double LineThickness, double PointSize, string Parent)
+    public GraphChartSpecifications(Vector3 Position, Vector2 Size, string GraphChartName, float VerticalAxisTextSeperation, int VerticalAxisFontSize, AxisFormat HorizontalAxisFormat, float HorizontalAxisTextSeperation, int HorizontalAxisFontSize, double LineThickness, double PointSize, string Parent, string Canvas)
     {
         this.Position = Position;
         this.Size = Size;
@@ -28,6 +29,7 @@ public struct GraphChartSpecifications
         this.LineThickness = LineThickness;
         this.PointSize = PointSize;
         this.Parent = Parent;
+        this.Canvas = Canvas;
     }
 
 }
