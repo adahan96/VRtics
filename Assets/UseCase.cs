@@ -19,6 +19,8 @@ public class UseCase : MonoBehaviour
     {
         ffuc.Add(() => LC.CreateLineChart(gcs));
         ffuc.Add(() => BC.CreateBarChart(bcs));
+        ffuc.Add(() => LC.CreateLineChart(gcs));
+        ffuc.Add(() => BC.CreateBarChart(bcs));
     }
 
     // Start is called before the first frame update
@@ -29,7 +31,7 @@ public class UseCase : MonoBehaviour
         bcs = new BarChartSpecifications(new Vector3(-350, 0, 0), new Vector2(317, 317), "BarChart77", 48.77f, 23.77f, 13, 13, 13, true, "Canvas_Left", "Canvas_Left");
         gcs = new GraphChartSpecifications(new Vector3(-250, -350, 0), new Vector2(600, 400), "Ornek Grafik", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "Canvas_Left", "Canvas_Left");
         fillDummyVar();
-        ucs = new UseCaseSpecifications("Canvas", new string[] { "Use Case X", "Use Case Y" }, 2, new Vector2(100, 100), ffuc);
+        ucs = new UseCaseSpecifications("Canvas", new string[] { "Merih kapı1", "Merih punch1", "Merih kapı2", "Antalya_demir" }, 4, new Vector2(100, 100), ffuc);
         addButtonsToMenu(ucs);
     }
 
