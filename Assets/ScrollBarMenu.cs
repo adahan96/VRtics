@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class ScrollBarMenu : MonoBehaviour
 {
+    Dictionary<string, int> canvasPositionIndex;
+    public MoveCanvas mc;
+
     Dictionary<string, bool> Toggle;
     Dictionary<string, GameObject> onScreen;
     public GameObject menu;
@@ -57,6 +60,12 @@ public class ScrollBarMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mc = FindObjectOfType(typeof(MoveCanvas)) as MoveCanvas;
+        canvasPositionIndex = new Dictionary<string, int>();
+        canvasPositionIndex["Canvas"] = 0;
+        canvasPositionIndex["Canvas_Right"] = 1;
+        canvasPositionIndex["Canvas_Left"] = 7;
+        canvasPositionIndex["Canvas_Left_Left"] = 6;
         onScreen = new Dictionary<string, GameObject>();
         Toggle = new Dictionary<string, bool>();
         MS = new MenuSpecifications(parent, menuName, bNames, noOfButtons, size, ffb, menuPosition);
@@ -114,6 +123,32 @@ public class ScrollBarMenu : MonoBehaviour
                 {
                     DashboardElementBackground.transform.localPosition = m.menuPosition;
 
+                    int from = canvasPositionIndex[panel2.transform.parent.name];
+                    int to = canvasPositionIndex[m.canvas];
+                    int dif = from - to;
+                    int lapse = 0;
+                    for (int i  = 0; i < Math.Abs(dif); i++)
+                    {
+                        if (dif < 0)
+                        {
+                            
+                            while (true)
+                            {
+                                lapse++;
+                                if (lapse % 360 == 0)
+                                {
+                                    mc.InitiateMovementRight();
+                                    lapse = 0;
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    /*
                     Transform currentCanvas = panel2.transform.parent;
                     Transform focusCanvas = panel.transform;
 
@@ -126,7 +161,7 @@ public class ScrollBarMenu : MonoBehaviour
                     currentCanvas.rotation = focusRot;
                     focusCanvas.position = curLoc;
                     focusCanvas.rotation = curRot;
-
+                    */
                     
                     
 
