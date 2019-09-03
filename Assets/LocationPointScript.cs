@@ -46,7 +46,7 @@ public class LocationPointScript : MonoBehaviour
     {
         its = new InfoTextSpecifications("Canvas_Right", "Merih", "Merih_Asansör_hub1", "Kapı ve punch makinasının bağlı olduğu hub ile ilgili sensör bilgilerini içermektedir.", new Vector2(200f, 200f), new Vector3(-211f, 0, 0));
         its_child = new InfoTextSpecifications("MainMenu", "Canvas_Right",  "fam", "fam", "Lorem ipsum dolor sit FAM FAM", new Vector2(100f, 100f), new Vector3(189f, 56f, 0));
-        ms_right = new MenuSpecifications("Canvas", "MainMenu", "menunameee", new string[] { "Show Analysis", "Show Analysis 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(250, 0, 0));
+        ms_right = new MenuSpecifications("Canvas_Left", "MainMenu", "menunameee", new string[] { "Show Analysis", "Show Analysis 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(250, 0, 0));
 
         IT = FindObjectOfType(typeof(InfoText)) as InfoText;
         fillDummyVar();
@@ -65,7 +65,7 @@ public class LocationPointScript : MonoBehaviour
         OnVRTriggerPressed(new Vector3(0, 0, 0));
         //   SBM.CreateScrollBarMenu(MS);
       //  SBM.CreateScrollBarMenu(MS);
-        GameObject.Find("Merih_kapı1_sıcaklık1").GetComponent<Button>().onClick.Invoke();
+   //     GameObject.Find("Merih_kapı1_sıcaklık1").GetComponent<Button>().onClick.Invoke();
      
 
     }

@@ -27,7 +27,6 @@ public class VRticsInitializer : MonoBehaviour
     private void Awake()
     {
         Vector3[] Rotations = {new Vector3(0,0,0), new Vector3(0, 90, 0), new Vector3(0, 90, 0), new Vector3(90, 0, 0), new Vector3(90, 0, 0), new Vector3(0, 0, 0)};
-        Debug.Log("hello???????????");
         cs = new CanvasSpecifications(dummySize, dummyPos);
         Vector3[] RelativePositions  = new Vector3[6];
         RelativePositions[0] = dummyPos;
@@ -41,12 +40,10 @@ public class VRticsInitializer : MonoBehaviour
         {          
             Canvases[i] = (GameObject)Instantiate(CanvasPrefab);   
             Canvases[i].name = "Canvas2" + i.ToString();
-            Debug.Log("hello???????????");
             Canvases[i].GetComponent<RectTransform>().sizeDelta = dummySize[i];
             Canvases[i].GetComponent<RectTransform>().position = RelativePositions[i];
             Canvases[i].GetComponent<RectTransform>().Rotate(Rotations[i]);
         }
-        Debug.Log("UTANAPISTI");
     }
     // Start is called before the first frame update
     void Start()

@@ -53,7 +53,6 @@ public class InfoText : MonoBehaviour
             else
             {
                 infoText.transform.localPosition = its.position + panel2.transform.localPosition;
-                Debug.Log("ASDASDASDSD");
             }
 
                 

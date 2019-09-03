@@ -17,12 +17,11 @@ public class cubeScript : MonoBehaviour
     }
     void OnVREnter()
     {
-        Debug.Log("jjjjjjjjjjjjjjjjjjjjjjjjjj");
  
     }
     void OnVRExit()
     {
-        Debug.Log("sa");
+
     }
     void OnVRTriggerDown(Vector3 RaycastPosition)
     {
