@@ -80,18 +80,18 @@ public class MoveCanvas : MonoBehaviour
     TimeSpan startTimeSpan = TimeSpan.Zero;
     TimeSpan periodTimeSpan = TimeSpan.FromSeconds(5);
     // Update is called once per frame
-    int lapse = 0;
+    //int lapse = 0;
     void Update()
     {
         
         MoveRight();
         MoveLeft();
-          lapse++;
-          if (lapse % 360 == 0)
-         {
-             InitiateMovementLeft();
-             lapse = 0;
-         }
+      //    lapse++;
+      //    if (lapse % 360 == 0)
+      //   {
+      //       InitiateMovementLeft();
+      //       lapse = 0;
+      //   }
         
 
 

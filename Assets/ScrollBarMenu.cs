@@ -204,7 +204,6 @@ public class ScrollBarMenu : MonoBehaviour
         else
         {
             menu = (GameObject)Instantiate(ScrollMenuPrefab);
-            Debug.Log(menu);
             var panel = GameObject.Find(m.canvas);
             //  var panel2 = GameObject.Find(m.parent);
 

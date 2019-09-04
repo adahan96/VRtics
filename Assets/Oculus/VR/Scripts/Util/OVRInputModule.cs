@@ -326,6 +326,7 @@ namespace UnityEngine.EventSystems
         GameObject hoverGo;
         Dictionary<string, bool> isPressedBefore; // if true call "OVRTriggerPressed" if false call "OVTriggerPressedAgain"
         bool flag = true;
+        Vector2 joystick;
 
         private void ProcessMousePress(MouseButtonEventData data)
         {
@@ -339,9 +340,13 @@ namespace UnityEngine.EventSystems
             
             if (hoverGo != pointerEvent.pointerCurrentRaycast.gameObject)
             {
-                if(hoverGo != null)
+             //   go.transform.position = pointerEvent.pointerCurrentRaycast.gameObject.transform.position;
+             //   go.transform.rotation = pointerEvent.pointerCurrentRaycast.gameObject.transform.rotation;
+
+                if (hoverGo != null)
                     hoverGo.SendMessage("OnVRExit");
                 hoverGo = pointerEvent.pointerCurrentRaycast.gameObject;
+                Debug.Log(hoverGo);
                 hoverGo.SendMessage("OnVREnter");
             }
             
@@ -381,7 +386,9 @@ namespace UnityEngine.EventSystems
                 
                 
                 go.transform.SendMessage("OnVRTriggerDown", pointerEvent.pointerCurrentRaycast.worldPosition);
-           }
+                joystick = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad);
+                go.transform.Translate(Vector3.forward * 5f * joystick.y * Time.deltaTime);
+            }
           //  else
            // {
             //    go.transform.SendMessage("OnVRTriggerReleased");
