@@ -333,7 +333,7 @@ namespace UnityEngine.EventSystems
            
             var pointerEvent = data.buttonData;
             var currentOverGo = pointerEvent.pointerCurrentRaycast.gameObject;
-
+            Debug.Log(pointerEvent.pointerCurrentRaycast.worldPosition);
            
             //  go = pointerEvent.pointerCurrentRaycast.gameObject;
             // go.SendMessage("OnVREnter");
@@ -386,8 +386,8 @@ namespace UnityEngine.EventSystems
                 
                 
                 go.transform.SendMessage("OnVRTriggerDown", pointerEvent.pointerCurrentRaycast.worldPosition);
-                joystick = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad);
-                go.transform.Translate(Vector3.forward * 5f * joystick.y * Time.deltaTime);
+                go.transform.SendMessage("OnVRTry", hoverGo.transform.rotation);
+
             }
           //  else
            // {
