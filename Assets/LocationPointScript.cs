@@ -24,16 +24,19 @@ public class LocationPointScript : MonoBehaviour
     public BarChartSpecifications bcs;
     public BarChartSpecifications bcs2;
     public GraphChartSpecifications gcs;
+    public GraphChartSpecifications gcs1;
+    public GraphChartSpecifications gcs2;
+    public GraphChartSpecifications gcs3;
     public InfoTextSpecifications its;
     public InfoTextSpecifications its_child;
     public static MenuSpecifications ms_child;
     public static MenuSpecifications ms_right;
     public void fillDummyVar()
     {
-        ffb.Add(() => { IT.CreateInfoText(its_child); LC.CreateLineChart(gcs);  SBM.CreateScrollBarMenu(ms_right);  });
-        ffb.Add(() => SBM.CreateScrollBarMenu(ms_child));
-        ffb.Add(() => Uicont.QuitGame());
-        ffb.Add(() => Uicont.QuitGame());
+        ffb.Add(() =>  LC.CreateLineChart(gcs));
+        ffb.Add(() => LC.CreateLineChart(gcs1));
+        ffb.Add(() => LC.CreateLineChart(gcs2));
+        ffb.Add(() => LC.CreateLineChart(gcs3));
 
 
         // ffb2.Add(() => GC.CreateGraphChart(gcs));
@@ -54,18 +57,20 @@ public class LocationPointScript : MonoBehaviour
         ms_child = new MenuSpecifications("Canvas_Left", "MainMenu", "SubMenu1", new string[] { "Graph Chart 1", "Bar Chart 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(250, 0, 0));
         bcs = new BarChartSpecifications(new Vector3(-350, 0, 0), new Vector2(317, 317), "BarChart77", 48.77f, 23.77f, 13, 13, 13, true, menuName, "Canvas_Right");
         bcs2 = new BarChartSpecifications(new Vector3(350, 0, 0), new Vector2(317, 317), "BarChart78", 38.77f, 33.77f, 16, 16, 16, true, "SubMenu1", "Canvas_Right");
-        gcs = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector2(450, 300), "Ornek Grafik", 2f, 23, AxisFormat.Time, 1f, 22, 2.569, 11.19, "MainMenu", "Canvas_Left");
-        Debug.Log(OVRGazePointer.instance.transform.position);
+        gcs = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector2(600, 400), "Merih kapı2 sıcaklık", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "Canvas_Left", "Canvas_Left");
+        gcs1 = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector2(600, 400), "Merih kapı1 titreşim", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "Canvas_Left", "Canvas_Left");
+        gcs2 = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector2(600, 400), "Merih punch1 sıcaklık", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "Canvas_Left", "Canvas_Left");
+        gcs3 = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector2(600, 400), "Merih Kapı2 sıcaklık1", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "Canvas_Left", "Canvas_Left");
         Uicont = FindObjectOfType(typeof(UIController)) as UIController;
         BC = FindObjectOfType(typeof(BarChartClass)) as BarChartClass;
         SBM = FindObjectOfType(typeof(ScrollBarMenu)) as ScrollBarMenu;
         LC = FindObjectOfType(typeof(LineChart)) as LineChart;
 
         //   Uicont.CreateScrollBarMenu(MS);
-        OnVRTriggerPressed(new Vector3(0, 0, 0));
+  //      OnVRTriggerPressed(new Vector3(0, 0, 0));
         //   SBM.CreateScrollBarMenu(MS);
       //  SBM.CreateScrollBarMenu(MS);
-        GameObject.Find("Merih_kapı1_sıcaklık1").GetComponent<Button>().onClick.Invoke();
+ //       GameObject.Find("Merih_kapı1_sıcaklık1").GetComponent<Button>().onClick.Invoke();
      
 
     }

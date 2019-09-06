@@ -20,7 +20,7 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
+        
         joystick = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad);
         // joystick = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad, OVRInput.Controller.RTrackedRemote);
 
@@ -31,6 +31,6 @@ public class PlayerScript : MonoBehaviour
         parentObject.transform.position = Vector3.Lerp(parentObject.transform.position, transform.position, 10f * Time.deltaTime);
 
         // Input.GetMouseButtonDown(0);
-        */
+        
     }
 }

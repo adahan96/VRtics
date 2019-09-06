@@ -53,7 +53,6 @@ public class MoveCanvas : MonoBehaviour
     {
         MoveLeftRequest = new LinkedList<bool>();
         MoveRequest = new LinkedList<bool>();
-        Debug.Log(MoveLeftRequest.Count);
         speed = 150f;
         leftleftIndex = 7;
         leftleftIndex1 = 7;

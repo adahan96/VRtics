@@ -101,14 +101,14 @@ public class ScrollBarMenu : MonoBehaviour
     {
         if (m.parent != null)
         {
-          //  if (!Toggle.ContainsKey(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name))
-          //  {
-          //      string pressedButtonName = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
-          //      Toggle[pressedButtonName] = false;
-          //  }
+            if (!Toggle.ContainsKey(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name))
+            {
+                string pressedButtonName = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
+                Toggle[pressedButtonName] = false;
+            }
 
-           // if (!Toggle[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name])
-           // {
+            if (!Toggle[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name])
+            {
                 menu = (GameObject)Instantiate(ScrollMenuPrefab);
                 var panel = GameObject.Find(m.canvas);
                 var panel2 = GameObject.Find(m.parent + "Background");
@@ -183,21 +183,21 @@ public class ScrollBarMenu : MonoBehaviour
                 onScreen[m.menuName] = menu;
                 onScreen[m.menuName + "Background"] = DashboardElementBackground;
                 addButtonsToMenu(m);
-        //        Toggle[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name] = true;
+                Toggle[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name] = true;
 
-          //  }
-          //  else
-           // {
+            }
+            else
+            {
                 //Destroy the object
-      //          Destroy(onScreen[m.menuName]);
+                Destroy(onScreen[m.menuName]);
                 //Also destroy the background
-    //            Destroy(onScreen[m.menuName + "Background"]);
+                Destroy(onScreen[m.menuName + "Background"]);
                 //Remove the destroyed objects from the Onscreen dictionary
-    //            onScreen.Remove(m.menuName);
-    //            onScreen.Remove(m.menuName + "Background");
+                onScreen.Remove(m.menuName);
+                onScreen.Remove(m.menuName + "Background");
                 //Set the buttons state to false indicating that it is not pressed yet
-   //             Toggle[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name] = false;
-     //       }
+                Toggle[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name] = false;
+            }
         
         }
 

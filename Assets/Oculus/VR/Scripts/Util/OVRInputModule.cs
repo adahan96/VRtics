@@ -333,7 +333,6 @@ namespace UnityEngine.EventSystems
            
             var pointerEvent = data.buttonData;
             var currentOverGo = pointerEvent.pointerCurrentRaycast.gameObject;
-            Debug.Log(pointerEvent.pointerCurrentRaycast.worldPosition);
            
             //  go = pointerEvent.pointerCurrentRaycast.gameObject;
             // go.SendMessage("OnVREnter");
