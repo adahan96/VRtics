@@ -54,14 +54,14 @@ public class LineChart : MonoBehaviour
             if (panel2.transform.parent != panel.transform)
             {
                 graphChart.transform.localPosition = gcs.Position;
-                /*
-                int from = canvasPositionIndex[panel2.transform.parent.name];
+                
+                int from = canvasPositionIndex[gcs.Parent];
                 int to = canvasPositionIndex[gcs.Canvas];
                 int dif = to - from;
                 if (dif > 3)
-                    dif = dif - 8;
+                    dif = dif - mc.positions.Length;
                 if (dif < -3)
-                    dif = dif + 8;
+                    dif = dif + mc.positions.Length;
                 for (int i = 0; i < Math.Abs(dif); i++)
                 {
                     if (dif < 0)
@@ -78,11 +78,11 @@ public class LineChart : MonoBehaviour
                         mc.InitiateMovementLeft();
                     }
                 }
-                */
+                
             }
             else
             {
-                graphChart.transform.localPosition = gcs.Position + panel2.transform.localPosition;
+                graphChart.transform.localPosition = gcs.Position;
             }
             graphChart.GetComponent<VerticalAxis>().GetComponent<Text>().fontSize = gcs.VerticalAxisFontSize;
             graphChart.GetComponent<HorizontalAxis>().Format = gcs.HorizontalAxisFormat;
@@ -90,7 +90,8 @@ public class LineChart : MonoBehaviour
             graphChart.GetComponent<StreamingGraph>().lineThickness = gcs.LineThickness;
             graphChart.GetComponent<StreamingGraph>().pointSize = gcs.PointSize;
             graphChart.GetComponent<StreamingGraph>().TotalPoints = 3;
-        graphChart.GetComponent<StreamingGraph>().categories = new string[] { "sa2", "sa1", "sae"};
+            graphChart.GetComponent<StreamingGraph>().categories = new string[] { "sa2", "sa1", "sae"};
+            graphChart.GetComponent<cubeScript>().gcs = gcs;
             graphChart.transform.rotation = panel.transform.rotation;
             GameObject text = new GameObject();
             text.transform.SetParent(panel.transform);

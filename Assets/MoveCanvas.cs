@@ -74,7 +74,6 @@ public class MoveCanvas : MonoBehaviour
         //MoveRight();
         // for(int i = 0; i < 2; i++)
         //   InitiateMovementRight();
-        Debug.Log(MoveLeftRequest.First.Value);
     }
     TimeSpan startTimeSpan = TimeSpan.Zero;
     TimeSpan periodTimeSpan = TimeSpan.FromSeconds(5);

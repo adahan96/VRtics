@@ -127,9 +127,9 @@ public class ScrollBarMenu : MonoBehaviour
                     int to = canvasPositionIndex[m.canvas];
                     int dif = to - from;
                     if (dif > 3)
-                        dif = dif - 8;
+                        dif = dif - mc.positions.Length;
                     if (dif < -3)
-                        dif = dif + 8;
+                        dif = dif + mc.positions.Length;
                     for (int i  = 0; i < Math.Abs(dif); i++)
                     {
                         if (dif < 0)
@@ -242,7 +242,8 @@ public class ScrollBarMenu : MonoBehaviour
             var panel = GameObject.Find(m.menuName + "/Viewport/Content");
             buttons[i].name = m.buttonNames[i];
             GameObject.Find(m.buttonNames[i]).GetComponentInChildren<Text>().text = m.buttonNames[i];
-             buttons[i].transform.position = panel.transform.position;
+        //    GameObject.Find(m.buttonNames[i]).GetComponentInChildren<SaHocam> = m.buttonNames[i];
+            buttons[i].transform.position = panel.transform.position;
             //buttons[i].transform.SetPositionAndRotation(panel.transform.position + m.menuPosition, new Quaternion(0,0,0,0));
             buttons[i].transform.rotation = panel.transform.rotation;
             buttons[i].GetComponent<RectTransform>().SetParent(panel.transform);

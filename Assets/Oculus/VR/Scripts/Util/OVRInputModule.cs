@@ -377,6 +377,7 @@ namespace UnityEngine.EventSystems
             if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger))
             {
                 dragging = false;
+                go.transform.SendMessage("OnVRTriggerReleased");
             }
 
 
