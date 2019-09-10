@@ -111,7 +111,7 @@ public class ScrollBarMenu : MonoBehaviour
             {
                 menu = (GameObject)Instantiate(ScrollMenuPrefab);
                 var panel = GameObject.Find(m.canvas);
-                var panel2 = GameObject.Find(m.parent + "Background");
+                var panel2 = GameObject.Find(m.parent);
                 
 
                 DashboardElementBackground = (GameObject)Instantiate(DashboardElementBackgroundPrefab);
@@ -119,11 +119,11 @@ public class ScrollBarMenu : MonoBehaviour
 
                 DashboardElementBackground.transform.SetParent(panel.transform);
 
-                if (panel2.transform.parent != panel.transform)
+                if (panel2.transform != panel.transform)
                 {
                     DashboardElementBackground.transform.localPosition = m.menuPosition;
 
-                    int from = canvasPositionIndex[panel2.transform.parent.name];
+                    int from = canvasPositionIndex[m.parent];
                     int to = canvasPositionIndex[m.canvas];
                     int dif = to - from;
                     if (dif > 3)

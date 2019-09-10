@@ -54,10 +54,10 @@ public class LocationPointScript : MonoBehaviour
         IT = FindObjectOfType(typeof(InfoText)) as InfoText;
         fillDummyVar();
         MS = new MenuSpecifications("Canvas_Right", menuName, bNames, noOfButtons, size, ffb, menuPosition);
-        ms_child = new MenuSpecifications("Canvas_Left", "MainMenu", "SubMenu1", new string[] { "Graph Chart 1", "Bar Chart 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(250, 0, 0));
+        ms_child = new MenuSpecifications("Canvas_Left", "Canvas_Right", "SubMenu1", new string[] { "Graph Chart 1", "Bar Chart 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(250, 0, 0));
         bcs = new BarChartSpecifications(new Vector3(-350, 0, 0), new Vector2(317, 317), "BarChart77", 48.77f, 23.77f, 13, 13, 13, true, menuName, "Canvas_Right");
         bcs2 = new BarChartSpecifications(new Vector3(350, 0, 0), new Vector2(317, 317), "BarChart78", 38.77f, 33.77f, 16, 16, 16, true, "SubMenu1", "Canvas_Right");
-        gcs = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector2(600, 400), "Merih kapı2 sıcaklık", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "Canvas_Right", "Canvas_Left_Left");
+        gcs = new GraphChartSpecifications(new Vector3(0, 300, 0), new Vector2(600, 400), "Merih kapı2 sıcaklık", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "Canvas_Left_Left");
         gcs1 = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector2(600, 400), "Merih kapı1 titreşim", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "Canvas_Right", "Canvas_Left_Left");
         gcs2 = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector2(600, 400), "Merih punch1 sıcaklık", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "Canvas_Right", "Canvas_Left_Left");
         gcs3 = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector2(600, 400), "Merih Kapı2 sıcaklık1", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "Canvas_Right", "Canvas_Left_Left");
@@ -67,10 +67,11 @@ public class LocationPointScript : MonoBehaviour
         LC = FindObjectOfType(typeof(LineChart)) as LineChart;
 
         //   Uicont.CreateScrollBarMenu(MS);
-  //     OnVRTriggerPressed(new Vector3(0, 0, 0));
+        //
+        OnVRTriggerPressed(new Vector3(0, 0, 0));
         //   SBM.CreateScrollBarMenu(MS);
       //  SBM.CreateScrollBarMenu(MS);
-    //    GameObject.Find("Merih_kapı1_sıcaklık1").GetComponent<Button>().onClick.Invoke();
+      //  GameObject.Find("Merih_kapı1_sıcaklık1").GetComponent<Button>().onClick.Invoke();
      
 
     }

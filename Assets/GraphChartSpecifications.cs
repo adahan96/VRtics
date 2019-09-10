@@ -31,5 +31,20 @@ public struct GraphChartSpecifications
         this.Parent = Parent;
         this.Canvas = Canvas;
     }
+    public GraphChartSpecifications(Vector3 Position, Vector2 Size, string GraphChartName, float VerticalAxisTextSeperation, int VerticalAxisFontSize, AxisFormat HorizontalAxisFormat, float HorizontalAxisTextSeperation, int HorizontalAxisFontSize, double LineThickness, double PointSize, string Canvas)
+    {
+        this.Position = Position;
+        this.Size = Size;
+        this.GraphChartName = GraphChartName;
+        this.VerticalAxisTextSeperation = VerticalAxisTextSeperation;
+        this.VerticalAxisFontSize = VerticalAxisFontSize;
+        this.HorizontalAxisFormat = HorizontalAxisFormat;
+        this.HorizontalAxisTextSeperation = HorizontalAxisTextSeperation;
+        this.HorizontalAxisFontSize = HorizontalAxisFontSize;
+        this.LineThickness = LineThickness;
+        this.PointSize = PointSize;
+        this.Parent = null;
+        this.Canvas = Canvas;
+    }
 
 }
