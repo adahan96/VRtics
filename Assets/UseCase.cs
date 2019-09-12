@@ -10,7 +10,7 @@ public class UseCase : MonoBehaviour
     public GameObject useCasePrefab;
     public UseCaseSpecifications ucs;
     List<UnityEngine.Events.UnityAction> ffuc = new List<UnityEngine.Events.UnityAction>();
-
+    public static string[] useCaseNames = new string[] { "Merih kapı1", "Merih punch1", "Merih kapı2", "Antalya_demir" };
     public BarChartClass BC;
     public LineChart LC;
     public GraphChartSpecifications gcs;
@@ -20,7 +20,7 @@ public class UseCase : MonoBehaviour
     public BarChartSpecifications bcs;
     public void fillDummyVar()
     {
-        ffuc.Add(() => { ClearCanvas(gcs.Canvas); LC.CreateLineChart(gcs);  });
+        ffuc.Add(() => { ClearCanvas(gcs.Canvas); LC.CreateLineChart(gcs); GameObject.Find("DashBoardName").GetComponent<Text>().text = "Merih kapı1"; });
         ffuc.Add(() => { ClearCanvas(gcs1.Canvas); LC.CreateLineChart(gcs1); });
         ffuc.Add(() => { ClearCanvas(gcs2.Canvas); LC.CreateLineChart(gcs2); });
         ffuc.Add(() => { ClearCanvas(gcs3.Canvas); LC.CreateLineChart(gcs3); });
@@ -37,8 +37,9 @@ public class UseCase : MonoBehaviour
         gcs2 = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector2(600, 400), "Merih Kapı 2", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "Canvas", "Canvas_Left");
         gcs3 = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector2(600, 400), "Antalya Demir", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "Canvas", "Canvas_Left");
         fillDummyVar();
-        ucs = new UseCaseSpecifications("Canvas", new string[] { "Merih kapı1", "Merih punch1", "Merih kapı2", "Antalya_demir" }, 4, new Vector2(100, 100), ffuc);
+        ucs = new UseCaseSpecifications("Canvas", useCaseNames, 4, new Vector2(100, 100), ffuc);
         addButtonsToMenu(ucs);
+        GameObject.Find("Merih kapı1").GetComponent<Button>().onClick.Invoke();
     }
 
     // Update is called once per frame
@@ -76,7 +77,19 @@ public class UseCase : MonoBehaviour
         GameObject canvas = GameObject.Find(canvasName);
         foreach (Transform child in canvas.transform)
         {
-            Destroy(child.gameObject);
+            if(child.name != "DashboardName")
+                Destroy(child.gameObject);
         }
+    }
+    public void saveLineChartToDashboard(string useCaseName, GraphChartSpecifications gcs)
+    {
+        int index = 0;
+        for(int i = 0; i < useCaseNames.Length; i++)
+        {
+            if (useCaseName == useCaseNames[i])
+                break;
+            index++;
+        }
+        ffuc[index] = () => { ffuc[index].Invoke(); LC.CreateLineChart(gcs); };
     }
 }

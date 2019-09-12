@@ -37,13 +37,13 @@ public class LineChart : MonoBehaviour
     {
         if (gcs.Parent != null)
         {
-            if (!Toggle.ContainsKey(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name))
-            {
-                string pressedButtonName = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
-                Toggle[pressedButtonName] = false;
-            }
-            if (!Toggle[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name])
-            {
+         //   if (!Toggle.ContainsKey(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name))
+         //   {
+         //       string pressedButtonName = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
+         //       Toggle[pressedButtonName] = false;
+         //   }
+         //   if (!Toggle[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name])
+         //   {
                 graphChart = (GameObject)Instantiate(GraphChartPrefab);
                 RectTransform rt = graphChart.GetComponent<RectTransform>();
                 rt.sizeDelta = gcs.Size;
@@ -95,26 +95,26 @@ public class LineChart : MonoBehaviour
                 graphChart.GetComponent<StreamingGraph>().categories = new string[] { "sa2", "sa1", "sae" };
                 graphChart.GetComponent<cubeScript>().gcs = gcs;
                 graphChart.transform.rotation = panel.transform.rotation;
-                GameObject text = new GameObject();
-                text.transform.SetParent(panel.transform);
-                Text myText = text.AddComponent<Text>();
-                myText.text = gcs.GraphChartName;
-                text.transform.SetPositionAndRotation(panel.transform.localPosition + gcs.Position, new Quaternion(0, 0, 0, 0));
+               // GameObject text = new GameObject();
+               // text.transform.SetParent(panel.transform);
+              //  Text myText = text.AddComponent<Text>();
+               // myText.text = gcs.GraphChartName;
+               // text.transform.SetPositionAndRotation(panel.transform.localPosition + gcs.Position, new Quaternion(0, 0, 0, 0));
                 onScreen[gcs.GraphChartName] = graphChart;
-                Toggle[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name] = true;
-            }
-            else
-            {
+     //           Toggle[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name] = true;
+     //       }
+     //       else
+      //      {
                 //Destroy the object
-                Destroy(onScreen[gcs.GraphChartName]);
+      //          Destroy(onScreen[gcs.GraphChartName]);
                 //Also destroy the background
                 //  Destroy(onScreen[gcs.GraphChartName]);
                 //Remove the destroyed objects from the Onscreen dictionary
-                onScreen.Remove(gcs.GraphChartName);
+      //          onScreen.Remove(gcs.GraphChartName);
                 // onScreen.Remove(gcs.GraphChartName);
                 //Set the buttons state to false indicating that it is not pressed yet
-                Toggle[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name] = false;
-            }
+      //          Toggle[UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name] = false;
+      //      }
         }
         else
         {
@@ -137,11 +137,11 @@ public class LineChart : MonoBehaviour
             graphChart.GetComponent<StreamingGraph>().categories = new string[] { "sa2", "sa1", "sae" };
             graphChart.GetComponent<cubeScript>().gcs = gcs;
             graphChart.transform.rotation = panel.transform.rotation;
-            GameObject text = new GameObject();
-            text.transform.SetParent(panel.transform);
-            Text myText = text.AddComponent<Text>();
-            myText.text = gcs.GraphChartName;
-            text.transform.SetPositionAndRotation(panel.transform.localPosition + gcs.Position, new Quaternion(0, 0, 0, 0));
+          //  GameObject text = new GameObject();
+          //  text.transform.SetParent(panel.transform);
+          //  Text myText = text.AddComponent<Text>();
+          //  myText.text = gcs.GraphChartName;
+          //  text.transform.SetPositionAndRotation(panel.transform.localPosition + gcs.Position, new Quaternion(0, 0, 0, 0));
 
         }
     }
