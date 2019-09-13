@@ -17,12 +17,12 @@ public class SendName : MonoBehaviour
     void Start()
     {
         startPoint = new Vector3(this.transform.GetComponent<RectTransform>().rect.width / 2, this.transform.GetComponent<RectTransform>().rect.height / 2, 0);
-        xPadding = 80;
-        yPadding = 60;
+        xPadding = 200;
+        yPadding = 150;
         a = 0;
         childCount = 0;
         positions = new List<Vector3>();
-        positions.Add(new Vector3(0, 0, 0));
+       // positions.Add(new Vector3(0, 0, 0));
         cd  = FindObjectOfType(typeof(CanvasData)) as CanvasData;
     }
     void Update()
@@ -40,14 +40,14 @@ public class SendName : MonoBehaviour
             childCount = transform.childCount;
             int PS = nextPerfectSquare(childCount);
 
-            a = (this.transform.GetComponent<RectTransform>().rect.width - (2 * xPadding)) / (childCount - 1);
+            a = (this.transform.GetComponent<RectTransform>().rect.width - (2 * xPadding)) / ((int)Math.Sqrt(PS));
             
             double rowColumn = Math.Sqrt(PS);
             for(int k = 0; k < rowColumn; k++)
             {
                 for(int j = 0; j < rowColumn; j++)
                 {
-                    positions.Add(new Vector3(k*a, j*a, 0));
+                    positions.Add(new Vector3(xPadding, -yPadding, 0) + new Vector3(-this.transform.GetComponent<RectTransform>().rect.width / 2, this.transform.GetComponent<RectTransform>().rect.height / 2, 0) + new Vector3(j*2*a, -k*a, 0));
                 }
             }
 
@@ -66,7 +66,7 @@ public class SendName : MonoBehaviour
                 i++;
             }
             
-            Debug.Log("sa");
+            Debug.Log(positions.Count);
         }
         
     }
@@ -76,6 +76,8 @@ public class SendName : MonoBehaviour
     }
     static int nextPerfectSquare(int N)
     {
+        if (Math.Floor(Math.Sqrt(N)) == Math.Sqrt(N))
+            return N;
         int nextN = (int)Math.Floor(Math.Sqrt(N)) + 1;
 
         return nextN * nextN;

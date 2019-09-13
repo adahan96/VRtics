@@ -20,7 +20,7 @@ public class UseCase : MonoBehaviour
     public BarChartSpecifications bcs;
     public void fillDummyVar()
     {
-        ffuc.Add(() => { ClearCanvas(gcs.Canvas); LC.CreateLineChart(gcs); GameObject.Find("DashBoardName").GetComponent<Text>().text = "Merih kapı1"; });
+        ffuc.Add(() => { ClearCanvas(gcs.Canvas); LC.CreateLineChart(gcs); GameObject.Find("DashboardName").GetComponent<Text>().text = "Merih kapı1"; });
         ffuc.Add(() => { ClearCanvas(gcs1.Canvas); LC.CreateLineChart(gcs1); });
         ffuc.Add(() => { ClearCanvas(gcs2.Canvas); LC.CreateLineChart(gcs2); });
         ffuc.Add(() => { ClearCanvas(gcs3.Canvas); LC.CreateLineChart(gcs3); });
@@ -40,6 +40,10 @@ public class UseCase : MonoBehaviour
         ucs = new UseCaseSpecifications("Canvas", useCaseNames, 4, new Vector2(100, 100), ffuc);
         addButtonsToMenu(ucs);
         GameObject.Find("Merih kapı1").GetComponent<Button>().onClick.Invoke();
+       saveLineChartToDashboard("Merih kapı1", gcs3);
+        GameObject.Find("Merih kapı1").GetComponent<Button>().onClick.Invoke();
+
+
     }
 
     // Update is called once per frame
@@ -90,6 +94,9 @@ public class UseCase : MonoBehaviour
                 break;
             index++;
         }
-        ffuc[index] = () => { ffuc[index].Invoke(); LC.CreateLineChart(gcs); };
+        Debug.Log("ggga");
+        ffuc[index] += () =>  LC.CreateLineChart(gcs);
+        useCases[index].GetComponent<Button>().onClick.AddListener(ffuc[index]);
+        Debug.Log("aaagg");
     }
 }
