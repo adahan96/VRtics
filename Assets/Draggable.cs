@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class cubeScript : MonoBehaviour
+public class Draggable : MonoBehaviour
 {
     public Vector3 initialPos;
     public Quaternion initialRot;
@@ -39,14 +39,7 @@ public class cubeScript : MonoBehaviour
     }
     void OnVRTriggerDown(Vector3 RaycastPosition)
     {
-
-        Debug.Log("TRIGGERED BEING PRESSED!!!");
-        //  UIController boss = new UIController();
-        //  boss.CreateBarChart(new BarChartSpecifications(new Vector3(350, 0, 0), new Vector2(317, 317), "BarChart78", 38.77f, 33.77f, 16, 16, 16, true, "SubMenu1"));
-        this.transform.position = RaycastPosition;
-        
-      //  this.transform.GetChild(0).transform.parent.position = this.transform.position;
-       
+        this.transform.position = RaycastPosition; 
     }
     void OnVRTry(Quaternion rotasyon)
     {
@@ -56,11 +49,12 @@ public class cubeScript : MonoBehaviour
     {
         this.transform.position = initialPos;
         this.transform.rotation = initialRot;
-        gcs = new GraphChartSpecifications(new Vector3(0,0,0), new Vector3(600,400), this.transform.name, 2f, this.GetComponent<VerticalAxis>().GetComponent<Text>().fontSize, this.GetComponent<HorizontalAxis>().Format, 1f, this.GetComponent<HorizontalAxis>().GetComponent<Text>().fontSize, this.GetComponent<StreamingGraph>().lineThickness, this.GetComponent<StreamingGraph>().pointSize, cd.canvasName);
-        LC.CreateLineChart(gcs);
-        UC.saveLineChartToDashboard(GameObject.Find("DashboardName").GetComponent<Text>().text, gcs);
-        //    UIController boss = new UIController();
-        //    boss.CreateBarChart(new BarChartSpecifications(new Vector3(-350, 0, 0), new Vector2(317, 317), "BarChart78", 38.77f, 33.77f, 16, 16, 16, true, "SubMenu1"));
-
+        
+        if (cd.droppable)
+        {
+            gcs = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector3(600, 400), this.transform.name, 2f, this.GetComponent<VerticalAxis>().GetComponent<Text>().fontSize, this.GetComponent<HorizontalAxis>().Format, 1f, this.GetComponent<HorizontalAxis>().GetComponent<Text>().fontSize, this.GetComponent<StreamingGraph>().lineThickness, this.GetComponent<StreamingGraph>().pointSize, cd.canvasName);
+            LC.CreateLineChart(gcs);
+            UC.saveLineChartToDashboard(GameObject.Find("DashboardName").GetComponent<Text>().text, gcs);
+        }
     }
 }
