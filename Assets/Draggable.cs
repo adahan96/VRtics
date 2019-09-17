@@ -52,9 +52,12 @@ public class Draggable : MonoBehaviour
         
         if (cd.droppable)
         {
-            gcs = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector3(600, 400), this.transform.name, 2f, this.GetComponent<VerticalAxis>().GetComponent<Text>().fontSize, this.GetComponent<HorizontalAxis>().Format, 1f, this.GetComponent<HorizontalAxis>().GetComponent<Text>().fontSize, this.GetComponent<StreamingGraph>().lineThickness, this.GetComponent<StreamingGraph>().pointSize, cd.canvasName);
-            LC.CreateLineChart(gcs);
-            UC.saveLineChartToDashboard(GameObject.Find("DashboardName").GetComponent<Text>().text, gcs);
+            if (GameObject.Find(cd.canvasName).transform.Find("DashboardName").GetComponent<Text>().text != "" && this.transform.parent.transform.name != cd.canvasName)
+            {
+                gcs = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector3(600, 400), this.transform.name, 2f, this.GetComponent<VerticalAxis>().GetComponent<Text>().fontSize, this.GetComponent<HorizontalAxis>().Format, 1f, this.GetComponent<HorizontalAxis>().GetComponent<Text>().fontSize, this.GetComponent<StreamingGraph>().lineThickness, this.GetComponent<StreamingGraph>().pointSize, cd.canvasName);
+                LC.CreateLineChart(gcs);
+                UC.saveLineChartToDashboard(GameObject.Find(cd.canvasName).transform.Find("DashboardName").GetComponent<Text>().text, gcs);
+            }
         }
     }
 }

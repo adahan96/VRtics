@@ -14,13 +14,13 @@ public class LocationPointScript : MonoBehaviour
  //   public GraphChartClass GC;
     // Start is called before the first frame update
     public static string menuName = "MainMenu";
-    public static int noOfButtons = 4; // will come from JSON. This is TO BE DELETED.
+    public static int noOfButtons = 7; // will come from JSON. This is TO BE DELETED.
     public static Vector2 size = new Vector2(200, 200); // will come from JSON. This is TO BE DELETED.
     public static string parent = "Canvas_Right";
     public static Vector3 menuPosition = new Vector3(85, 0, 0);
     List<UnityEngine.Events.UnityAction> ffb = new List<UnityEngine.Events.UnityAction>();
     List<UnityEngine.Events.UnityAction> ffb2 = new List<UnityEngine.Events.UnityAction>();
-    static string[] bNames = { "Merih_kapı1_sıcaklık1", "Merih_kapı1_titreşim1", "Merih_punch1_sıcaklık1", "Merih_kapı2 _sıcaklık1" };
+    static string[] bNames = { "Merih_kapı1_sıcaklık1", "Merih_kapı1_titreşim1", "Merih_punch1_sıcaklık1", "Merih_kapı2 _sıcaklık1", "as", "aaaaaaaaa" , "abba" };
     public BarChartSpecifications bcs;
     public BarChartSpecifications bcs2;
     public GraphChartSpecifications gcs;
@@ -34,6 +34,9 @@ public class LocationPointScript : MonoBehaviour
     public void fillDummyVar()
     {
         ffb.Add(() => {  LC.CreateLineChart(gcs); });
+        ffb.Add(() => LC.CreateLineChart(gcs1));
+        ffb.Add(() => LC.CreateLineChart(gcs2));
+        ffb.Add(() => LC.CreateLineChart(gcs3));
         ffb.Add(() => LC.CreateLineChart(gcs1));
         ffb.Add(() => LC.CreateLineChart(gcs2));
         ffb.Add(() => LC.CreateLineChart(gcs3));

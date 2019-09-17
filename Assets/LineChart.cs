@@ -26,6 +26,10 @@ public class LineChart : MonoBehaviour
         canvasPositionIndex["Canvas_Right"] = 1;
         canvasPositionIndex["Canvas_Left"] = 7;
         canvasPositionIndex["Canvas_Left_Left"] = 6;
+        canvasPositionIndex["Panel"] = 0;
+        canvasPositionIndex["Panel_Right"] = 1;
+        canvasPositionIndex["Panel_Left"] = 7;
+        canvasPositionIndex["Panel_Left_Left"] = 6;
 
     }
 
@@ -93,8 +97,8 @@ public class LineChart : MonoBehaviour
                 graphChart.GetComponent<HorizontalAxis>().GetComponent<Text>().fontSize = gcs.HorizontalAxisFontSize;
                 graphChart.GetComponent<StreamingGraph>().lineThickness = gcs.LineThickness;
                 graphChart.GetComponent<StreamingGraph>().pointSize = gcs.PointSize;
-                graphChart.GetComponent<StreamingGraph>().TotalPoints = 3;
-                graphChart.GetComponent<StreamingGraph>().categories = new string[] { "sa2", "sa1", "sae" };
+                graphChart.GetComponent<StreamingGraph>().TotalPoints = 1;
+                graphChart.GetComponent<StreamingGraph>().categories = new string[] { "sa2" };
                 graphChart.GetComponent<Draggable>().gcs = gcs;
                 graphChart.transform.rotation = panel.transform.rotation;
                // GameObject text = new GameObject();
@@ -120,8 +124,8 @@ public class LineChart : MonoBehaviour
         }
         else
         {
-            if (!onScreenClone.ContainsKey(gcs.GraphChartName))
-            {
+        //    if (!onScreenClone.ContainsKey(gcs.GraphChartName))
+        //    {
                 graphChart = (GameObject)Instantiate(GraphChartPrefab);
                 RectTransform rt = graphChart.GetComponent<RectTransform>();
                 rt.sizeDelta = gcs.Size;
@@ -147,16 +151,16 @@ public class LineChart : MonoBehaviour
                 //  Text myText = text.AddComponent<Text>();
                 //  myText.text = gcs.GraphChartName;
                 //  text.transform.SetPositionAndRotation(panel.transform.localPosition + gcs.Position, new Quaternion(0, 0, 0, 0));
-            }
-            else
-            {
+      //      }
+       //     else
+       //     {
                 //Destroy the object
-                Destroy(onScreenClone[gcs.GraphChartName]);
+     //           Destroy(onScreenClone[gcs.GraphChartName]);
                 //Also destroy the background
                 //  Destroy(onScreen[gcs.GraphChartName]);
                 //Remove the destroyed objects from the Onscreen dictionary
-                onScreenClone.Remove(gcs.GraphChartName);
-            }
+    //            onScreenClone.Remove(gcs.GraphChartName);
+    //       }
 
         }
     }
