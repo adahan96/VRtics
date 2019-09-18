@@ -15,9 +15,9 @@ public class LocationPointScript : MonoBehaviour
     // Start is called before the first frame update
     public static string menuName = "MainMenu";
     public static int noOfButtons = 7; // will come from JSON. This is TO BE DELETED.
-    public static Vector2 size = new Vector2(200, 200); // will come from JSON. This is TO BE DELETED.
+    public static Vector2 size = new Vector2(266, 266); // will come from JSON. This is TO BE DELETED.
     public static string parent = "Canvas_Right";
-    public static Vector3 menuPosition = new Vector3(85, 0, 0);
+    public static Vector3 menuPosition = new Vector3(180, 0, 0);
     List<UnityEngine.Events.UnityAction> ffb = new List<UnityEngine.Events.UnityAction>();
     List<UnityEngine.Events.UnityAction> ffb2 = new List<UnityEngine.Events.UnityAction>();
     static string[] bNames = { "Merih_kapı1_sıcaklık1", "Merih_kapı1_titreşim1", "Merih_punch1_sıcaklık1", "Merih_kapı2 _sıcaklık1", "as", "aaaaaaaaa" , "abba" };
@@ -50,7 +50,7 @@ public class LocationPointScript : MonoBehaviour
     MenuSpecifications MS;
     void Start()
     {
-        its = new InfoTextSpecifications("Canvas_Right", "Merih", "Merih_Asansör_hub1", "Kapı ve punch makinasının bağlı olduğu hub ile ilgili sensör bilgilerini içermektedir.", new Vector2(200f, 200f), new Vector3(-211f, 0, 0));
+        its = new InfoTextSpecifications("Canvas_Right", "Merih", "Merih_Asansör_hub1", "Kapı ve punch makinasının bağlı olduğu hub ile ilgili sensör bilgilerini içermektedir.", new Vector2(320f, 320f), new Vector3(-180f, 0, 0));
         its_child = new InfoTextSpecifications("MainMenu", "Canvas_Right",  "fam", "fam", "Lorem ipsum dolor sit FAM FAM", new Vector2(100f, 100f), new Vector3(189f, 56f, 0));
         ms_right = new MenuSpecifications("Canvas_Left", "MainMenu", "menunameee", new string[] { "Show Analysis", "Show Analysis 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(250, 0, 0));
 
@@ -71,7 +71,7 @@ public class LocationPointScript : MonoBehaviour
 
         //   Uicont.CreateScrollBarMenu(MS);
         //
-     //   OnVRTriggerPressed(new Vector3(0, 0, 0));
+        OnVRTriggerPressed(new Vector3(0, 0, 0));
         //   SBM.CreateScrollBarMenu(MS);
       //  SBM.CreateScrollBarMenu(MS);
        // GameObject.Find("Merih_kapı1_sıcaklık1").GetComponent<Button>().onClick.Invoke();

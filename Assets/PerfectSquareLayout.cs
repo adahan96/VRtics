@@ -21,31 +21,41 @@ public class PerfectSquareLayout : MonoBehaviour
     }
     void Update()
     {
-        if (childCount != transform.childCount)
+        if (childCount != transform.childCount-1)
         {
             positions.Clear();
-            childCount = transform.childCount;
+            childCount = transform.childCount-1;
             int PS = nextPerfectSquare(childCount);
 
             a = (this.transform.GetComponent<RectTransform>().rect.width - (2 * xPadding)) / ((int)Math.Sqrt(PS));
 
             double rowColumn = Math.Sqrt(PS);
-            for (int k = 0; k < rowColumn; k++)
+            if (childCount == 1)
             {
-                for (int j = 0; j < rowColumn; j++)
+                positions.Add(new Vector3(0, 0, 0));
+            }
+            else
+            {
+                for (int k = 0; k < rowColumn; k++)
                 {
-                    positions.Add(new Vector3(xPadding, -yPadding, 0) + new Vector3(-this.transform.GetComponent<RectTransform>().rect.width / 2, this.transform.GetComponent<RectTransform>().rect.height / 2, 0) + new Vector3(j * 2 * a, -k * a, 0));
+                    for (int j = 0; j < rowColumn; j++)
+                    {
+                        positions.Add(new Vector3(xPadding, -yPadding, 0) + new Vector3(-this.transform.GetComponent<RectTransform>().rect.width / 2, this.transform.GetComponent<RectTransform>().rect.height / 2, 0) + new Vector3(j * 2 * a, -k * a, 0));
+                    }
                 }
             }
 
             int i = 0;
             foreach (Transform t in this.transform)
             {
-                Debug.Log("safor");
-                //      Debug.Log(t.gameObject);
-                t.localPosition = positions[i];
-                t.localScale = new Vector3((float)(1 / Math.Sqrt(PS)), (float)(1 / Math.Sqrt(PS)), (float)(1 / Math.Sqrt(PS)));
-                i++;
+                if (t.name != "DashboardName")
+                {
+                    Debug.Log("safor");
+                    //      Debug.Log(t.gameObject);
+                    t.localPosition = positions[i];
+                    t.localScale = new Vector3((float)(1 / Math.Sqrt(PS)), (float)(1 / Math.Sqrt(PS)), (float)(1 / Math.Sqrt(PS)));
+                    i++;
+                }
             }
         }
     }

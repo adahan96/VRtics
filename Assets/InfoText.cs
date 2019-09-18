@@ -64,7 +64,7 @@ public class InfoText : MonoBehaviour
             RectTransform rt_body = infoText.transform.GetChild(0).GetComponent<RectTransform>();
             rt_body.sizeDelta = its.size * new Vector2(0.8f, 0.8f);
             infoText.transform.GetChild(1).GetComponent<Text>().text = its.head;
-            infoText.transform.GetChild(1).transform.localPosition = new Vector3(0, its.size.y / 1.7f, 0);
+            infoText.transform.GetChild(1).transform.localPosition = new Vector3(0, its.size.y / 1.9f, 0);
             RectTransform rt_head = infoText.transform.GetChild(1).GetComponent<RectTransform>();
             rt_head.sizeDelta = its.size * new Vector2(1f, 0.2f);
 
@@ -102,7 +102,7 @@ public class InfoText : MonoBehaviour
             RectTransform rt_body = infoText.transform.GetChild(0).GetComponent<RectTransform>();
             rt_body.sizeDelta = its.size * new Vector2(0.8f,0.8f);
             infoText.transform.GetChild(1).GetComponent<Text>().text = its.head;
-            infoText.transform.GetChild(1).transform.localPosition = new Vector3(0, its.size.y / 1.7f, 0);
+            infoText.transform.GetChild(1).transform.localPosition = new Vector3(0, its.size.y / 1.9f, 0);
             RectTransform rt_head = infoText.transform.GetChild(1).GetComponent<RectTransform>();
             rt_head.sizeDelta = its.size * new Vector2(1f, 0.2f);
 

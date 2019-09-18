@@ -75,15 +75,13 @@ public class LineChart : MonoBehaviour
                         if (dif < 0)
                         {
 
-                            // yield return new WaitUntil(() => mc.mutex == true);
-
-                            mc.InitiateMovementRight();
+                  //          mc.InitiateMovementRight();
 
 
                         }
                         else
                         {
-                            mc.InitiateMovementLeft();
+                  //          mc.InitiateMovementLeft();
                         }
                     }
 
@@ -145,7 +143,7 @@ public class LineChart : MonoBehaviour
                 graphChart.GetComponent<StreamingGraph>().categories = new string[] { "sa2", "sa1", "sae" };
                 graphChart.GetComponent<Draggable>().gcs = gcs;
                 graphChart.transform.rotation = panel.transform.rotation;
-                onScreenClone[gcs.GraphChartName] = graphChart;
+            //    onScreenClone[gcs.GraphChartName] = graphChart;
                 //  GameObject text = new GameObject();
                 //  text.transform.SetParent(panel.transform);
                 //  Text myText = text.AddComponent<Text>();
@@ -163,6 +161,7 @@ public class LineChart : MonoBehaviour
     //       }
 
         }
+
     }
 
 }
