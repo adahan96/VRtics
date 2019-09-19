@@ -22,9 +22,9 @@ public class BarFeed : MonoBehaviour
 
     public BarFeed()
     {
-        categories = cgs;
-        group = grp;
-        values = vls;
+   //     categories = cgs;
+    //    group = grp;
+     //   values = vls;
     }
 
 

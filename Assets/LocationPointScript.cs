@@ -14,13 +14,13 @@ public class LocationPointScript : MonoBehaviour
  //   public GraphChartClass GC;
     // Start is called before the first frame update
     public static string menuName = "MainMenu";
-    public static int noOfButtons = 7; // will come from JSON. This is TO BE DELETED.
+    public static int noOfButtons = 2; // will come from JSON. This is TO BE DELETED.
     public static Vector2 size = new Vector2(266, 266); // will come from JSON. This is TO BE DELETED.
     public static string parent = "Canvas_Right";
     public static Vector3 menuPosition = new Vector3(180, 0, 0);
     List<UnityEngine.Events.UnityAction> ffb = new List<UnityEngine.Events.UnityAction>();
     List<UnityEngine.Events.UnityAction> ffb2 = new List<UnityEngine.Events.UnityAction>();
-    static string[] bNames = { "Merih_kapı1_sıcaklık1", "Merih_kapı1_titreşim1", "Merih_punch1_sıcaklık1", "Merih_kapı2 _sıcaklık1", "as", "aaaaaaaaa" , "abba" };
+    static string[] bNames = { "Month Breakdown", "Region Breakdown"};
     public BarChartSpecifications bcs;
     public BarChartSpecifications bcs2;
     public GraphChartSpecifications gcs;
@@ -33,13 +33,9 @@ public class LocationPointScript : MonoBehaviour
     public static MenuSpecifications ms_right;
     public void fillDummyVar()
     {
-        ffb.Add(() => {  LC.CreateLineChart(gcs); });
-        ffb.Add(() => LC.CreateLineChart(gcs1));
-        ffb.Add(() => LC.CreateLineChart(gcs2));
-        ffb.Add(() => LC.CreateLineChart(gcs3));
-        ffb.Add(() => LC.CreateLineChart(gcs1));
-        ffb.Add(() => LC.CreateLineChart(gcs2));
-        ffb.Add(() => LC.CreateLineChart(gcs3));
+        ffb.Add(() => {  BC.CreateBarChart(bcs); });
+        ffb.Add(() => BC.CreateBarChart(bcs2));
+
 
 
         // ffb2.Add(() => GC.CreateGraphChart(gcs));
@@ -58,8 +54,8 @@ public class LocationPointScript : MonoBehaviour
         fillDummyVar();
         MS = new MenuSpecifications("Canvas_Right", menuName, bNames, noOfButtons, size, ffb, menuPosition);
         ms_child = new MenuSpecifications("Canvas_Left", "Canvas_Right", "SubMenu1", new string[] { "Graph Chart 1", "Bar Chart 2" }, 2, new Vector2(200, 200), ffb2, new Vector3(250, 0, 0));
-        bcs = new BarChartSpecifications(new Vector3(-350, 0, 0), new Vector2(317, 317), "BarChart77", 48.77f, 23.77f, 13, 13, 13, true, menuName, "Canvas_Right");
-        bcs2 = new BarChartSpecifications(new Vector3(350, 0, 0), new Vector2(317, 317), "BarChart78", 38.77f, 33.77f, 16, 16, 16, true, "SubMenu1", "Canvas_Right");
+        bcs = new BarChartSpecifications(new Vector3(0, 0, 0), new Vector2(400, 400), "Month Breakdown", 48.77f, 23.77f, 13, 13, 13, true, "Canvas_Right", "Canvas_Left_Left", new string[] {"Jan", "Feb", "March" }, new float[] {5f, 3f, 10f });
+        bcs2 = new BarChartSpecifications(new Vector3(0, 0, 0), new Vector2(317, 317), "Region Breakdown", 38.77f, 33.77f, 16, 16, 16, true, "Canvas_Right", "Canvas_Left_Left", new string[] { "Jan", "Feb", "March" }, new float[] { 5f, 3f, 10f });
         gcs = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector2(600, 400), "Merih kapı2 sıcaklık", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "Canvas_Right", "Canvas_Left_Left");
         gcs1 = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector2(600, 400), "Merih kapı1 titreşim", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "Canvas_Right", "Canvas_Left_Left");
         gcs2 = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector2(600, 400), "Merih punch1 sıcaklık", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "Canvas_Right", "Canvas_Left_Left");
@@ -74,7 +70,7 @@ public class LocationPointScript : MonoBehaviour
         OnVRTriggerPressed(new Vector3(0, 0, 0));
         //   SBM.CreateScrollBarMenu(MS);
       //  SBM.CreateScrollBarMenu(MS);
-       // GameObject.Find("Merih_kapı1_sıcaklık1").GetComponent<Button>().onClick.Invoke();
+        GameObject.Find("Month Breakdown").GetComponent<Button>().onClick.Invoke();
      
 
     }

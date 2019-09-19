@@ -31,7 +31,7 @@ public class UseCase : MonoBehaviour
     {
         BC = FindObjectOfType(typeof(BarChartClass)) as BarChartClass;
         LC = FindObjectOfType(typeof(LineChart)) as LineChart;
-        bcs = new BarChartSpecifications(new Vector3(-350, 0, 0), new Vector2(317, 317), "BarChart77", 48.77f, 23.77f, 13, 13, 13, true, "Canvas_Left", "Canvas_Left");
+     //   bcs = new BarChartSpecifications(new Vector3(-350, 0, 0), new Vector2(317, 317), "BarChart77", 48.77f, 23.77f, 13, 13, 13, true, "Canvas_Left", "Canvas_Left");
         gcs = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector2(600, 400), "Merih Kapı 1", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "Canvas", "Canvas_Left");
         gcs1 = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector2(600, 400), "Merih puch 1", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "Canvas", "Canvas_Left");
         gcs2 = new GraphChartSpecifications(new Vector3(0, 0, 0), new Vector2(600, 400), "Merih Kapı 2", 2f, 13, AxisFormat.Time, 1f, 12, 2.569, 11.19, "Canvas", "Canvas_Left");

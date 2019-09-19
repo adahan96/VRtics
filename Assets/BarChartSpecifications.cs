@@ -13,8 +13,10 @@ public struct BarChartSpecifications
     public bool BarAnimation { get; set; }
     public string Parent { get; set; }
     public string canvas { get; set; }
+    public string[] categories { get; set; }
+    public float[] values { get; set; }
 
-    public BarChartSpecifications(Vector3 Position, Vector2 Size, string BarChartName, float BarSeperation, float BarSize, int ItemLabelsFontSize, int CategoryLabelsFontSize, int GroupLabelsFontSize, bool BarAnimation, string Parent, string canvas)
+    public BarChartSpecifications(Vector3 Position, Vector2 Size, string BarChartName, float BarSeperation, float BarSize, int ItemLabelsFontSize, int CategoryLabelsFontSize, int GroupLabelsFontSize, bool BarAnimation, string Parent, string canvas, string[] categories, float[] values)
     {
         this.canvas = canvas;
         this.Position = Position;
@@ -27,8 +29,10 @@ public struct BarChartSpecifications
         this.GroupLabelsFontSize = GroupLabelsFontSize;
         this.BarAnimation = BarAnimation;
         this.Parent = Parent;
+        this.categories = categories;
+        this.values = values;
     }
-  /*  public BarChartSpecifications(Vector3 Position, Vector2 Size, string BarChartName, float BarSeperation, float BarSize, int ItemLabelsFontSize, int CategoryLabelsFontSize, int GroupLabelsFontSize, bool BarAnimation, string canvas)
+    public BarChartSpecifications(Vector3 Position, Vector2 Size, string BarChartName, float BarSeperation, float BarSize, int ItemLabelsFontSize, int CategoryLabelsFontSize, int GroupLabelsFontSize, bool BarAnimation, string canvas, string[] categories, float[] values)
     {
         this.canvas = canvas;
         this.Position = Position;
@@ -41,6 +45,8 @@ public struct BarChartSpecifications
         this.GroupLabelsFontSize = GroupLabelsFontSize;
         this.BarAnimation = BarAnimation;
         this.Parent = null;
+        this.categories = categories;
+        this.values = values;
     }
-    */
+    
 }
